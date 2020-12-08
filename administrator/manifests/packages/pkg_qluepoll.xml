@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <extension type="package" version="3.0" method="upgrade">
+ <name>Qlue Poll</name>
+ <author>Aaron Hance</author>
+ <creationDate>November 2019</creationDate>
+ <packagename>qluepoll</packagename>
+ <version>2.0.3</version>
+ <url>http://www.qlue.uk/</url>
+ <packager>Aaron Hance</packager>
+<scriptfile>script.pkg_qluepoll.php</scriptfile>
+ <packagerurl>http://www.qlue.uk/</packagerurl>
+ <description>This exension allow the creation and display of polls.</description>
+  <files folder="packages">
+   <file type="component" id="com_qluepoll" >com_qluepoll.zip</file>
+   <file type="module" id="mod_qluepoll" client="site">mod_qluepoll.zip</file>
+ </files>
+ </extension>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>Qlue Poll</name>
+	<author>Aaron Hance</author>
+	<creationDate>October 2019</creationDate>
+	<copyright>Copyright Qlue Limited</copyright>
+	<authorEmail>aaronh@qlue.uk</authorEmail>
+	<authorUrl>www.qlue.uk</authorUrl>
+	<version>2.0.3</version>
+	<description>This module displays polls from the qlue poll component.</description>
+
+	<files>
+		<filename module="mod_qluepoll">mod_qluepoll.php</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+		<folder>models</folder>
+	</files>
+
+	<config>
+	<fields name="params">
+		<fieldset name="basic" addfieldpath="/modules/mod_qluepoll/models/fields">
+			<field
+			name="question"
+               type="sql"
+               default="1"
+               label="Select a poll"
+               query="SELECT id AS value, question FROM #__qluepoll" />
+			/>
+			<field
+				name="layout"
+				type="modulelayout"
+				label="JFIELD_ALT_LAYOUT_LABEL"
+				description="JFIELD_ALT_MODULE_LAYOUT_DESC"
+			/>
+			<field
+				name="hidecount"
+				type="radio"
+				label="Vote count"
+				description="Hide the vote count for people after voting."
+				default="1"
+				class="btn-group"
+			>
+				<option value="1">Show</option>
+				<option value="0">Hide</option>
+			</field>
+			<field 
+				name="displaytype"
+				type="list"
+				label="Votes display"
+				description="Select how votes will be displayed after voting"
+			>
+				<option value="table">Table</option>
+				<option value="pie">Pie</option>
+				<option value="bar">Bar</option>
+			</field>
+			<field
+				name="displayfigure"
+				type="radio"
+				label="Figure display"
+				description="What type of figures to use when displaying vote count"
+				class="btn-group"
+				default="percentage"
+			>
+				<option value="percentage">Percentage</option>
+				<option value="number">Number</option>
+			</field>
+			<field
+				name="displaycaptcha"
+				type="recaptcha"
+				label="Recaptcha"
+				description="Show a captcha preventing bots from voting. Requires keys to be set in the qlue poll component configuration."
+				default="0"
+				class="btn-group"
+			>
+				<option value="1">Show</option>
+				<option value="0">Hide</option>
+			</field>
+
+			<field name="requireAuth" default="0" type="radio" label="Require login" class="btn-group" description="If yes, only lets logged in users vote.">
+				<option value="1">Yes</option>
+				<option value="0">No</option>
+			</field>
+
+		</fieldset>
+		<fieldset name="style" label="Style">
+			<field name="showBorder" default="1" type="radio" label="Show Border" class="btn-group" description="Show border, and background if set, around the module.">
+				<option value="1">Show</option>
+				<option value="0">Hide</option>
+			</field>
+
+			<field name="width" label="Width" description="Width of the module. In px or %."/>
+			<field name="height" label="Height" description="Height of the module. In px or %."/>
+			<field name="borderRadius" label="Border Radius" description="Curve the corners of the border. In px or %."/>
+
+			<field name="borderColour" type="color" label="Border Colour" description="Colour of the border."/>
+			<field name="backgroundColour" type="color" label="Background Colour" description="Colour of the background."/>
+			<field name="textColour" type="color" label="Text Colour" description="Colour of text." />
+
+			<field name="graphFillColour" type="color" label="Graph Fill Colour" description="fill colour for bar graph"></field>
+			<field name="graphTooltip" type="radio" default="1" label="Show Graph Tooltips" class="btn-group" description="Show tooltips when hovering over graphs.">
+				<option value="1">Show</option>
+				<option value="0">Hide</option>
+			</field>
+
+			<field name="tableRadius" label="Table Border Radius" description="Border radius for the results graph."/>
+			<field name="tableBackground" type="color" label="Table Background Colour" description="Primary table background colour"/>
+			<field name="tableBackground2" type="color" label="Table Background Colour 2" description="Secondary background table colour."/> 
+		</fieldset>
+	</fields>
+	</config>
+</extension>

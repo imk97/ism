@@ -101,13 +101,13 @@ $indexDir = dirname(__FILE__);
 <?php $this->view->renderHeader($indexDir, $this->params); ?>
 <?php $this->view->renderLayout(); ?>
 <?php $this->view->renderFooter($indexDir, $this->params); ?>
-<section class="u-backlink u-clearfix u-grey-80">
+/* <section class="u-backlink u-clearfix u-grey-80">
             <a class="u-link" href="https://nicepage.com/" target="_blank">
         <span></span>
             </a>
         <p class="u-text"><span>created with</span></p>
         <a class="u-link" href="https://nicepage.com/joomla-page-builder" target="_blank"><span>Joomla Page Builder</span></a>.
-    </section>
+</section> */
 
 <?php echo $backToTop; ?>
 </body>

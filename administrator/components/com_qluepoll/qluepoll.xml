@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+	<name>Qlue Poll</name>
+	<creationDate>October 2019</creationDate>
+	<author>Aaron Hance</author>
+	<authorEmail>aaronh@qlue.uk</authorEmail>
+	<authorUrl>http://www.qlue.uk</authorUrl>
+	<copyright>Copyright Qlue Limited</copyright>
+	<version>2.0.3</version>
+	<description>This component allows the creation of polls and displays their analytics</description>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update> <!-- Runs on update; New since J2.5 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu link='index.php?option=com_qluepoll'>Qlue Poll</menu>
+
+		<files>
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>qluepoll.php</filename>
+            <filename>controller.php</filename>
+            <filename>config.xml</filename>
+
+			<folder>sql</folder>
+		    <folder>models</folder>
+			<folder>views</folder>
+			<folder>helpers</folder>
+			<folder>tables</folder>
+			<folder>controllers</folder>
+		</files>
+	</administration>
+
+</extension>
