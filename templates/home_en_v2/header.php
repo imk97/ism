@@ -1,29 +1,33 @@
 <?php
     $document = JFactory::getDocument();
 ?>
-    <header class="u-clearfix u-header u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-header" id="sec-594e">
+    <header class="u-clearfix u-gradient u-header u-valign-middle-xl u-header" id="sec-594e">
   <div class="u-clearfix u-layout-wrap u-layout-wrap-1">
     <div class="u-gutter-0 u-layout">
       <div class="u-layout-row">
         <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-          <div class="u-container-layout u-valign-top-lg u-valign-top-sm u-valign-top-xs u-container-layout-1">
+          <div class="u-container-layout u-container-layout-1">
             <?php $logoInfo = getLogoInfo(array(
             'src' => "/images/jatanegara.png",
-            'href' => "https://nicepage.com",
+            'href' => "#",
             'default_width' => '81'
-        ), true); ?><a href="<?php echo $logoInfo['href']; ?>" class="u-image u-logo u-image-1" data-image-width="1010" data-image-height="791">
+        ), true); ?><a href="<?php echo $logoInfo['href']; ?>" class="u-image u-logo u-image-1" data-image-width="1010" data-image-height="791" title="Logo Jata Negara">
               <img src="<?php echo $logoInfo['src']; ?>" class="u-logo-image u-logo-image-1" data-image-width="81">
             </a>
-            <p class="u-align-center-xs u-custom-font u-font-oswald u-text u-text-1">INSTITUT SOSIAL MALAYSIA</p>
-            <p class="u-align-center-xs u-custom-font u-font-arial u-text u-text-2">WELCOME TO OFFICIAL WEBSITE OF </p>
+            <p class="u-align-center-sm u-align-center-xs u-custom-font u-font-oswald u-text u-text-1">INSTITUT SOSIAL MALAYSIA</p>
+            <p class="u-align-center-sm u-align-center-xs u-custom-font u-font-arial u-text u-text-2">WELCOME TO THE OFFICIAL WEBSITE</p>
+            <p class="u-align-center-xs u-custom-font u-font-arial u-text u-text-3">MINISTRY OF WOMEN, FAMILY AND COMMUNITY DEVELOPMENT </p>
           </div>
         </div>
         <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
           <div class="u-container-layout u-container-layout-2"><!--position-->
             <?php $positionName = 'language-header'; if ($positionName && CoreStatements::containsModules($positionName)) : ?><div data-position="language-header" class="u-position u-position-1"><!--block-->
               <?php echo CoreStatements::position('language-header', 'block%block_1', 'block_1'); ?><!--/block-->
+            </div><?php else: ?><div class="hidden-position" style="display:none"></div><?php endif; ?><!--/position--><!--position-->
+            <?php $positionName = 'w3c'; if ($positionName && CoreStatements::containsModules($positionName)) : ?><div data-position="w3c" class="u-position u-position-2"><!--block-->
+              <?php echo CoreStatements::position('w3c', 'block%block_2', 'block_2'); ?><!--/block-->
             </div><?php else: ?><div class="hidden-position" style="display:none"></div><?php endif; ?><!--/position-->
-            <form action="<?php echo JRoute::_('index.php'); ?>" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-grey-5 u-hover-palette-1-base u-search u-search-left u-search-1" method="post">
+            <form action="<?php echo JRoute::_('index.php'); ?>" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-expanded-width-xs u-grey-5 u-hover-palette-1-base u-search u-search-left u-search-1" method="post">
               <button class="u-search-button" type="submit">
                 <span class="u-search-icon u-spacing-10">
                   <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 56.966 56.966" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-0092"></use></svg>
@@ -34,10 +38,10 @@
 <input type="hidden" name="option" value="com_search">
 
             </form>
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-aduan.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="31" data-image-height="29">
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-contact.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="31" data-image-height="29">
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-FAQ.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-4" data-image-width="31" data-image-height="29">
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-sitemap.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-5" data-image-width="31" data-image-height="29">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-aduan.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="31" data-image-height="29" data-href="#">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-contact.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="31" data-image-height="29" data-href="#">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-FAQ.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-4" data-image-width="31" data-image-height="29" data-href="faq">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-sitemap.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-5" data-image-width="31" data-image-height="29" data-href="#">
           </div>
         </div>
       </div>
@@ -51,7 +55,7 @@
     <div class="u-gutter-0 u-layout">
       <div class="u-layout-row">
         <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-3">
-          <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-container-layout-4">
+          <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
             <?php echo CoreStatements::position('hmenu', '', 1, 'hmenu'); ?>
           </div>
         </div>

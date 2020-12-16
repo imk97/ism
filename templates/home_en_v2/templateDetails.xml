@@ -34,6 +34,7 @@
     </files>
     <positions>
         <position>language-header</position>
+        <position>w3c</position>
         <position>hmenu</position>
         <position>statistic</position>
         <position>position-sidebar</position>
