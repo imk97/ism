@@ -51,7 +51,7 @@
               </a>
             </div>
             <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/iso1-removebg-preview.png" alt="" class="u-image u-image-default u-image-2" data-image-width="662" data-image-height="243">
-            <div class="u-custom-php u-expanded-width-md u-expanded-width-xs u-custom-php-1"><?php
+            <div class="u-custom-php u-expanded-width-md u-expanded-width-xs u-custom-php-1"><?php echo "Hello World";
 ?></div>
             <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-12">Peta Laman</p>
             <p class="u-text u-text-13">|</p>
