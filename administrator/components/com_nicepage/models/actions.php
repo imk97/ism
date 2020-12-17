@@ -155,6 +155,27 @@ class NicepageModelActions extends JModelAdmin
         );
     }
 
+    /**
+     * Save local storage key
+     *
+     * @param JInput $data Data parameters
+     *
+     * @return mixed|string
+     */
+    public function saveLocalStorageKey($data) {
+        $data = $this->_getRequestData($data);
+        if (is_string($data) || (is_array($data) && isset($data['status']) && $data['status'] === 'error')) {
+            return $this->_response($data);
+        }
+        $json = $data->get('json', array(), 'RAW');
+        $this->saveConfig(array('localStorageKey' => $json));
+        return $this->_response(
+            array(
+                'result' => 'done',
+                'data' => $json,
+            )
+        );
+    }
 
 
     /**

@@ -384,11 +384,15 @@ class Nicepage_Data_Loader
                     if (preg_match('/\[page_(\d+)\]/', $href, $matches)) {
                         $pages = $this->_data['Pages'];
                         $pid = $matches[1];
+                        $hrefParts = explode('#', $href);
                         $pageData = isset($pages[$pid]) ? $pages[$pid] : array();
                         if (isset($pageData['joomla_id'])) {
                             $contentPageId = $matches[1];
                             $type = 'single-article';
                             $postId = $pageData['joomla_id'];
+                            if (count($hrefParts) > 1) {
+                                $postId .= '#' . $hrefParts[1];
+                            }
                         } else {
                             $href = '#';
                         }

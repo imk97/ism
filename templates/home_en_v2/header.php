@@ -38,10 +38,10 @@
 <input type="hidden" name="option" value="com_search">
 
             </form>
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-aduan.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="31" data-image-height="29" data-href="#">
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-contact.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="31" data-image-height="29" data-href="#">
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-FAQ.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-4" data-image-width="31" data-image-height="29" data-href="faq">
-            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/1-sitemap.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-5" data-image-width="31" data-image-height="29" data-href="#">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="31" data-image-height="29" data-href="#" onclick="window.open('https://kpwkm.spab.gov.my/eApps/system/index.do')">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="31" data-image-height="29" data-href="#" onclick="location='/ism/index.php/en/contact-us'">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-4" data-image-width="31" data-image-height="29" data-href="#" onclick="location='/ism/index.php/en/faq'">
+            <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-5" data-image-width="31" data-image-height="29" data-href="#" onclick="location='/ism/index.php/en/sitemap'">
           </div>
         </div>
       </div>

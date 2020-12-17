@@ -149,6 +149,7 @@ class NicepageHelpersNicepage
                 'uploadFile' => $index . 'uploadFile',
                 'uploadImage' => $index . 'uploadImage',
                 'savePage' => $index . 'savePage',
+                'saveLocalStorageKey' => $index . 'saveLocalStorageKey',
                 'clearChunks' => $index . 'clearChunks',
                 'getSite' => $index . 'getSite',
                 'getSitePosts' => $index . 'getSitePosts',

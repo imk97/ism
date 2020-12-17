@@ -25,7 +25,7 @@ if ($metaGeneratorContent) {
 }
 
 $templateUrl = $document->baseurl . '/templates/' . $document->template;
-$faviconPath = "" ? $templateUrl . '/images/' . "" : '';
+$faviconPath = "" ? $templateUrl . '/images/' . "" : 'ism.jpg';
 
 Core::load("Core_Page");
 // Initialize $view:

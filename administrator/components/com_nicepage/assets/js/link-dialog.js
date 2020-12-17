@@ -48,7 +48,11 @@ function openEditLinkDialog(data) {
 
             dialog.find('.url-option, .target-option').removeClass('hidden');
             dialog.find('.list-container').removeClass('hidden');
-            dialog.find('.page-option').removeClass('hidden');
+            if (data.isMenu) {
+                dialog.find('.page-option').addClass('hidden');
+            } else {
+                dialog.find('.page-option').removeClass('hidden');
+            }
 
             // hide other options
             dialog.find('#adminForm').addClass('hidden');

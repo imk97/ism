@@ -32,6 +32,15 @@ case 2:
     break;
 }
 
+$originalLink = $item->link;
+$linkParts = explode('#', $originalLink);
+if (count($linkParts) > 1) {
+    $anchor = $linkParts[1];
+    if (strpos($originalLink, 'com_content') !== false && preg_match('/#' . $anchor . '$/', $originalLink)) {
+        $attributes['data-link-anchor'] = '#' . $anchor;
+    }
+}
+
 $title = '<span>' . $item->title . '</span>';
 
 $linktype = $item->menu_image

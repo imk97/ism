@@ -139,6 +139,10 @@ var DataUploader = (function() {
         saveData(window.nicepageSettings.actions.savePage, postData, callback);
     }
 
+    function saveLocalStorageKey(json, callback) {
+        saveData(window.nicepageSettings.actions.saveLocalStorageKey, {json: json}, callback);
+    }
+
     function saveSiteSettings(data, callback) {
         saveData(window.nicepageSettings.actions.saveSiteSettings, {settings: data}, callback);
     }
@@ -262,6 +266,7 @@ var DataUploader = (function() {
 
     return {
         savePage: loggedInWrap(savePage),
+        saveLocalStorageKey: loggedInWrap(saveLocalStorageKey),
         saveSiteSettings: loggedInWrap(saveSiteSettings),
         savePreferences: loggedInWrap(savePreferences),
         saveMenuItems: loggedInWrap(saveMenuItems),

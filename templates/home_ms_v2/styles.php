@@ -11,7 +11,7 @@
   min-height: 114px;
 }
 .u-header .u-container-layout-1 {
-  padding: 15px 15px 0 30px;
+  padding: 15px 15px 0 15px;
 }
 .u-header .u-image-1 {
   margin: 7px auto 0 9px;

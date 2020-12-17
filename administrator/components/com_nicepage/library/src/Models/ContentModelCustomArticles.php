@@ -61,6 +61,7 @@ class ContentModelCustomArticles extends ContentModelArticles
         $this->setState('list.direction', 'DESC');
         $this->setState('list.start', 0);
         $this->setState('list.limit', 20);
+        $this->setState('params', new JRegistry());
     }
 
     /**

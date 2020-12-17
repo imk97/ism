@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 /*!
- * animate.css -https://daneden.github.io/animate.css/
- * Version - 3.7.2
+ * animate.css -http://daneden.me/animate
+ * Version - 3.7.0
  * Licensed under the MIT license - http://opensource.org/licenses/MIT
  *
- * Copyright (c) 2019 Daniel Eden
+ * Copyright (c) 2018 Daniel Eden
  */
 
 @-webkit-keyframes bounce {
@@ -3613,14 +3613,12 @@
   animation-duration: 3s;
 }
 
-@media (print), (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion) {
   .animated {
-    -webkit-animation-duration: 1ms !important;
-    animation-duration: 1ms !important;
-    -webkit-transition-duration: 1ms !important;
-    transition-duration: 1ms !important;
-    -webkit-animation-iteration-count: 1 !important;
-    animation-iteration-count: 1 !important;
+    -webkit-animation: unset !important;
+    animation: unset !important;
+    -webkit-transition: none !important;
+    transition: none !important;
   }
 }
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
@@ -4232,13 +4230,13 @@ ol {
   /*TODO maye need another solution for negative marin*/
   cursor: pointer;
   color: inherit;
-  font-style: inherit;
   font-size: inherit;
-  font-weight: inherit;
   font-family: inherit;
   line-height: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
+  font-style: inherit;
+  font-weight: inherit;
   text-decoration: none;
   border: 0 none transparent;
   outline-width: 0;
@@ -4286,12 +4284,10 @@ ol {
   border-radius: 0 !important;
 } .nicepage-container 
 .u-text a, .nicepage-container 
-.u-blog-control a, .nicepage-container 
+.u-post-content a, .nicepage-container 
 .u-tab-item a, .nicepage-container 
 .u-nav-item a {
-  font-style: inherit;
   font-size: inherit;
-  font-weight: inherit;
   font-family: inherit;
   line-height: inherit;
   letter-spacing: inherit;
@@ -4367,13 +4363,13 @@ a {
 } .nicepage-container 
 .u-logo {
   color: inherit;
-  font-style: inherit;
   font-size: inherit;
-  font-weight: inherit;
   font-family: inherit;
   line-height: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
+  font-style: inherit;
+  font-weight: inherit;
   text-decoration: none;
   border: 0 none transparent;
   outline-width: 0;
@@ -4405,6 +4401,7 @@ a {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   background-color: transparent;
   color: inherit;
+  text-align: inherit;
   height: auto;
 } .nicepage-container 
 .u-form-horizontal label, .nicepage-container 
@@ -5079,6 +5076,7 @@ a {
 .u-form .u-form-group.u-form-checkbox input[type="checkbox"], .nicepage-container 
 .u-form .u-form-group.u-form-agree input[type="checkbox"] {
   float: left;
+  flex-shrink: 0;
 } .nicepage-container 
 .u-form .u-form-group.u-form-checkbox label.u-label, .nicepage-container 
 .u-form .u-form-group.u-form-agree label.u-label {
@@ -9330,6 +9328,9 @@ section.u-image,
   z-index: auto;
   position: absolute !important;
 } .nicepage-container 
+.u-offcanvas-opened .u-header.u-sticky + section {
+  z-index: -1;
+} .nicepage-container 
 .u-hide-header .u-header, .nicepage-container 
 .u-hide-footer .u-footer {
   display: none;
@@ -12833,13 +12834,13 @@ div.u-video, .nicepage-container
 .u-nav-link {
   display: block;
   white-space: nowrap;
-  font-style: inherit;
   font-size: inherit;
-  font-weight: inherit;
   font-family: inherit;
   line-height: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
+  font-style: inherit;
+  font-weight: inherit;
   text-decoration: none;
   border: 0 none transparent;
   outline-width: 0;
@@ -12881,6 +12882,17 @@ div.u-video, .nicepage-container
   width: 0;
   height: 0;
   overflow: hidden;
+} .nicepage-container 
+.menu-collapse .u-nav-link.u-file-icon img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+} .nicepage-container 
+.menu-collapse .u-nav-link.u-file-icon::after {
+  content: '';
+  height: 1em;
+  display: block;
 } .nicepage-container 
 .u-nav-container-collapse {
   display: none;
@@ -12947,6 +12959,10 @@ div.u-video, .nicepage-container
 } .nicepage-container 
 .u-enable-responsive.u-offcanvas .u-sidenav > * {
   position: relative;
+} .nicepage-container 
+.u-enable-responsive.u-offcanvas .u-sidenav .u-nav-link {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 } .nicepage-container 
 .u-enable-responsive.u-offcanvas:not(.u-menu-open-right) .u-sidenav {
   border-left: none;
@@ -13203,13 +13219,13 @@ p {
 } .nicepage-container 
 .u-social-url {
   color: inherit;
-  font-style: inherit;
   font-size: inherit;
-  font-weight: inherit;
   font-family: inherit;
   line-height: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
+  font-style: inherit;
+  font-weight: inherit;
   text-decoration: none;
   border: 0 none transparent;
   outline-width: 0;
@@ -14472,6 +14488,9 @@ a.pswp__share--download:hover {
 .u-text .u-btn.u-button-link {
   display: inline;
 } .nicepage-container 
+.u-text.u-cart-block-content .u-btn {
+  white-space: nowrap;
+} .nicepage-container 
 .u-slider {
   display: flex;
   flex-direction: column;
@@ -14707,12 +14726,16 @@ a.pswp__share--download:hover {
 } .nicepage-container 
 .u-cart-button-container {
   display: flex;
+  position: relative;
   justify-content: space-between;
 } .nicepage-container 
 .u-cart-blocks-container {
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
+  position: relative;
 } .nicepage-container 
 .u-dialog {
   display: flex;
@@ -14785,13 +14808,13 @@ a.pswp__share--download:hover {
 .u-carousel-control-prev, .nicepage-container 
 .u-carousel-control-next {
   color: inherit;
-  font-style: inherit;
   font-size: inherit;
-  font-weight: inherit;
   font-family: inherit;
   line-height: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
+  font-style: inherit;
+  font-weight: inherit;
   text-decoration: none;
   border: 0 none transparent;
   outline-width: 0;

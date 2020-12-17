@@ -67,7 +67,7 @@ class Nicepage_Editor
         } else {
             $parts = '/#/landing';
         }
-        $currentUrl = $this->getAdminUrl() . '/index.php?option=com_nicepage&view=display&ver=' . urlencode('1606805363116')  . ($domain ? '&domain=' . $domain : '') . $parts;
+        $currentUrl = $this->getAdminUrl() . '/index.php?option=com_nicepage&view=display&ver=' . urlencode('3.1.3')  . ($domain ? '&domain=' . $domain : '') . $parts;
 
         JHtml::_('behavior.modal'); // for SqueezeBox
 
@@ -208,6 +208,18 @@ EOF;
         $params = JComponentHelper::getParams('com_media');
         $exts = $params->get('upload_extensions', 'pdf');
         return explode(',', $exts);
+    }
+
+    /**
+     * Get local storage key
+     *
+     * @return |null
+     */
+    public function getLocalStorageKey() {
+        if (isset($this->_componentConfig['localStorageKey']) && $this->_componentConfig['localStorageKey']) {
+            return $this->_componentConfig['localStorageKey'];
+        }
+        return null;
     }
 
     /**
@@ -578,6 +590,7 @@ EOF;
             'newPageTitle' => $isNewPage ? $this->_article->title : '',
             'fontsInfo' => $this->getFontsInfo(),
             'videoFiles' => $this->getVideoFiles(),
+            'localStorageKey' => $this->getLocalStorageKey(),
         );
 
         $themeEditorSettings = $this->getEditorSettingsFromDefaultTheme();

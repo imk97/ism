@@ -216,6 +216,7 @@ class NpPage
         if ($publishDialogsHtml && $this->getPageView() !== 'landing' && $this->_isNicepageTheme != '1') {
             $publishDialogsHtml =  '<div class="nicepage-container"><div class="'. $this->_props['bodyClass'] .'">' . $publishDialogsHtml . '</div></div>';
         }
+        $publishDialogsHtml = NicepageHelpersNicepage::processSectionsHtml($publishDialogsHtml, true, $this->_props['pageId']);
         $html = str_replace('</body>', $publishDialogsHtml . '</body>', $html);
         return $html;
     }
@@ -250,49 +251,11 @@ class NpPage
         if (!$this->_buildedPageElements) {
             $this->buildPageElements();
         }
-        $sectionsHtml = '';
-        $type = $this->_pageView === 'landing' ? 'landing' : 'content';
-        if (preg_match('/<\!--np\_' . $type . '-->([\s\S]+?)<\!--\/np\_' . $type .'-->/', $pageContent, $matches)) {
-            $sectionsHtml = $matches[1];
-        }
-        if ($this->_pageView === 'landing') {
-            $pageContent = preg_replace('/(<body[^>]+>)([\s\S]*)(<\/body>)/', '$1{header}' . $sectionsHtml . '{footer}$3', $pageContent);
-            $search  = array('{bodyClass}', '{bodyStyle}', '{header}', '{footer}');
-            $replace = array(
-                $this->getBodyClass(),
-                $this->getBodyStyle(),
-                $this->getHeader(),
-                $this->getFooter()
-            );
-            $pageContent = str_replace($search, $replace, $pageContent);
-        } else if ($this->_pageView === 'landing_with_header_footer') {
-            $bodyStartTag = '<body>';
-            $bodyContent = '';
-            $bodyEndTag = '</body>';
-            if (preg_match('/(<body[^>]+>)([\s\S]*)(<\/body>)/', $pageContent, $matches)) {
-                $bodyStartTag = $matches[1];
-                $bodyContent = trim($matches[2]);
-                $bodyEndTag = $matches[3];
-            }
 
-            if ($bodyContent == '') {
-                $newPageContent = $bodyStartTag . $sectionsHtml . $bodyEndTag;
-            } else {
-                $newPageContent = $bodyStartTag;
-                if (preg_match('/<header[^>]+>[\s\S]*<\/header>/', $bodyContent, $matches2)) {
-                    $newPageContent .= $matches2[0];
-                }
-                $newPageContent .= $sectionsHtml;
-                if (preg_match('/<footer[^>]+>[\s\S]*<\/footer>/', $bodyContent, $matches3)) {
-                    $newPageContent .= $matches3[0];
-                }
-                if (preg_match('/<\/footer>([\s\S]*)/', $bodyContent, $matches4)) {
-                    $newPageContent .= $matches4[1];
-                }
-                $newPageContent .= $bodyEndTag;
-            }
-            $pageContent = preg_replace('/(<body[^>]+>)([\s\S]*)(<\/body>)/', '[[body]]', $pageContent);
-            $pageContent = str_replace('[[body]]', $newPageContent, $pageContent);
+        if ($this->_pageView === 'landing') {
+            $pageContent = $this->buildNpHeaderFooter($pageContent);
+        } else if ($this->_pageView === 'landing_with_header_footer') {
+            $pageContent = $this->buildThemeHeaderFooter($pageContent);
         } else {
             $pageContent = preg_replace('/<!--\/?np\_content-->/', '', $pageContent);
         }
@@ -310,6 +273,85 @@ class NpPage
             }
         }
         $pageContent = $this->applyPublishDialogs($pageContent);
+        return $pageContent;
+    }
+
+    /**
+     * Build page with np header&footer option
+     *
+     * @param string $pageContent Page content
+     *
+     * @return mixed
+     */
+    public function buildNpHeaderFooter($pageContent)
+    {
+        $placeholderRe = '/<\!--np\_landing-->([\s\S]+?)<\!--\/np\_landing-->/';
+        if (!preg_match($placeholderRe, $pageContent, $placeHolderMatches)) {
+            return $pageContent;
+        }
+        $sectionsHtml = $placeHolderMatches[1];
+
+        $bodyRe = '/(<body[^>]+>)([\s\S]*)(<\/body>)/';
+        if (!preg_match($bodyRe, $pageContent, $bodyMatches)) {
+            return $pageContent;
+        }
+
+        list($bodyStartTag, $bodyContent, $bodyEndTag) = array($bodyMatches[1], $bodyMatches[2], $bodyMatches[3]);
+        return str_replace(
+            array(
+                $bodyStartTag,
+                $bodyContent,
+                $bodyEndTag,
+            ),
+            array(
+                str_replace('{bodyClass}', $this->getBodyClass(), $bodyStartTag) . $this->getHeader(),
+                $sectionsHtml,
+                $this->getFooter() . $bodyEndTag,
+            ),
+            $pageContent
+        );
+    }
+
+    /**
+     * Build page with theme header&footer option
+     *
+     * @param string $pageContent Page content
+     *
+     * @return mixed
+     */
+    public function buildThemeHeaderFooter($pageContent)
+    {
+        $placeholderRe = '/<\!--np\_content-->([\s\S]+?)<\!--\/np\_content-->/';
+        if (!preg_match($placeholderRe, $pageContent, $placeHolderMatches)) {
+            return $pageContent;
+        }
+        $sectionsHtml = $placeHolderMatches[1];
+
+        $bodyRe = '/(<body[^>]+>)([\s\S]*)(<\/body>)/';
+        if (!preg_match($bodyRe, $pageContent, $bodyMatches)) {
+            return $pageContent;
+        }
+
+        list($bodyStartTag, $bodyContent, $bodyEndTag) = array($bodyMatches[1], trim($bodyMatches[2]), $bodyMatches[3]);
+
+        if ($bodyContent == '') {
+            $newPageContent = $bodyStartTag . $sectionsHtml . $bodyEndTag;
+        } else {
+            $newPageContent = $bodyStartTag;
+            if (preg_match('/<header[^>]+>[\s\S]*<\/header>/', $bodyContent, $headerMatches)) {
+                $newPageContent .= $headerMatches[0];
+            }
+            $newPageContent .= $sectionsHtml;
+            if (preg_match('/<footer[^>]+>[\s\S]*<\/footer>/', $bodyContent, $footerMatches)) {
+                $newPageContent .= $footerMatches[0];
+            }
+            if (preg_match('/<\/footer>([\s\S]*)/', $bodyContent, $afterFooterContentMatches)) {
+                $newPageContent .= $afterFooterContentMatches[1];
+            }
+            $newPageContent .= $bodyEndTag;
+        }
+        $pageContent = preg_replace('/(<body[^>]+>)([\s\S]*)(<\/body>)/', '[[body]]', $pageContent);
+        $pageContent = str_replace('[[body]]', $newPageContent, $pageContent);
         return $pageContent;
     }
 
