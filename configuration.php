@@ -28,7 +28,7 @@ class JConfig {
 	public $ftp_user = '';
 	public $ftp_root = '';
 	public $ftp_enable = '0';
-	public $offset = 'UTC';
+	public $offset = 'Asia/Singapore';
 	public $mailonline = '1';
 	public $mailer = 'mail';
 	public $mailfrom = 'itmam97@gmail.com';
