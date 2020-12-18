@@ -31,12 +31,10 @@ class modVisitorHelper
         $query = $db->getQuery(true)
                     ->select('*')
                     ->from($db->quoteName('#__Visitor'));
-                        // ->where('id = '. $db->Qoute($params));
         $db->setQuery($query);
         $db->execute();
         $total = $db->getNumRows();
-        // $total = $db->loadRow();
-        // print_r($total);
+
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $query = $db->getQuery(true)
@@ -48,45 +46,24 @@ class modVisitorHelper
         $daily = $db->getNumRows();
 
         $test1 = $db->getQuery(true)
-                    ->select('date')
+                    ->select('month(date) as month')
                     ->from($db->quoteName('#__Visitor'));
         $db->setQuery($test1);
-        $test = $db->loadRow();
-        print_r($test);
-        // print_r($daily);
-
-        // echo $db->getDateFormat();
-        // $query = $db->getQuery(true)
-        //             ->select('*')
-        //             ->from($db->quoteName('#__Visitor'))
-        //             ->where(
-        //                 $test = $db->getQuery(true)
-        //                 ->select('month(date) as month')
-        //                 ->from($db->quoteName('#__Visitor'));
-        //                 $db->setQuery($test) . "=" . $db->quote(date("m")));
-        // $db->setQuery($query);
-        // $db->execute();
-        // $month = $db->getNumRows();
-        // $month = $db->loadRow();
-        // print_r($month);
+        $test = $db->loadColumn();
+        // print_r($test);
+        $month = 0;
+        for ($i=0; $i < count($test); $i++) { 
+            if ($test[$i] == date("m")) {
+                $month = $month + 1;
+            }
+        }
+        // print_r($count);
 
         $result = array();
 
-        array_push($result, $total, $daily);
-        // print_r('Harian : ' . $result[0]. '<br>');
-        // print_r('Bulanan : ' .$result[1]. '<br>');
-        // print_r('Jumlah : ' . $result[2]. '<br>');
-        // print_r('Kemaskini Terkini : ' . $result[3]);
-        // print_r('Jumlah : ' . $result[2]);
+        array_push($result, $total, $daily, $month);
+
         return $result;
     }
 
-    // function getDaily() {
-    //     $query = $db->getQuery(true)
-    //                 ->select('COUNT(*)')
-    //                 ->from($db->quoteName('#__Visitor'))
-    //                 ->where($db->qouteName('date') . "=" . date("Y-m-d"));
-    //     $db->setQuery($query);
-    //     return $result = $db->loadRow();
-    // }
 }

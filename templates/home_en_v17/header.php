@@ -42,27 +42,23 @@
               <div class="u-container-layout u-container-layout-3">
                 <div class="u-container-style u-group u-shape-rectangle u-group-2">
                   <div class="u-container-layout u-container-layout-4">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="74" data-image-height="64" data-href="#">
-                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-1">Soalan Lazim</a>
+                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-1"><img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-2" data-image-width="74" data-image-height="64" data-href="#">FAQ</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-3">
                   <div class="u-container-layout u-container-layout-5">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="58" data-image-height="52" data-href="#">
-                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-2">Hubungi Kami</a>
+                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-2"><img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-3" data-image-width="58" data-image-height="52" data-href="#">Contact Us</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-4">
                   <div class="u-container-layout u-container-layout-6">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-4" data-image-width="74" data-image-height="63" data-href="#">
-                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-3">Aduan &amp;<br>Maklumbalas 
+                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-3"><img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-4" data-image-width="74" data-image-height="63" data-href="#">Feedback &amp;<br>Complaint 
                     </a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-5">
                   <div class="u-container-layout u-valign-top u-container-layout-7">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-5" data-image-width="70" data-image-height="63" data-href="#">
-                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-4">Peta Laman</a>
+                    <a href="https://nicepage.com/website-mockup" class="u-btn u-button-style u-none u-btn-4"><img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-5" data-image-width="70" data-image-height="63" data-href="#">Sitemap</a>
                   </div>
                 </div>
               </div>
