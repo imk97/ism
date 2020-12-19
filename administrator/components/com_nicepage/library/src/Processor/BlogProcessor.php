@@ -6,10 +6,14 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Processor;
+
 defined('_JEXEC') or die;
 
+use NP\Models\ContentModelCustomArticles;
+use \JLoader;
+
 JLoader::register('Nicepage_Data_Mappers', JPATH_ADMINISTRATOR . '/components/com_nicepage/tables/mappers.php');
-JLoader::register('ContentModelCustomArticles', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Models/ContentModelCustomArticles.php');
 
 class BlogProcessor
 {
@@ -92,7 +96,7 @@ class BlogProcessor
             if (preg_match('/^tags:/', $source)) {
                 $tags = str_replace('tags:', '', $source);
             } else {
-                $categoryObject = Nicepage_Data_Mappers::get('category');
+                $categoryObject = \Nicepage_Data_Mappers::get('category');
                 $categoryList = $categoryObject->find(array('title' => $source));
                 if (count($categoryList) < 1) {
                     return $posts;

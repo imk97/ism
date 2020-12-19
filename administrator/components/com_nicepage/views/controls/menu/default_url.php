@@ -7,6 +7,8 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Utility\Theme;
+
 jimport('joomla.filter.output');
 
 $linkClassName = isset($linkClassName) ? $linkClassName : '';
@@ -37,4 +39,4 @@ $linktype = $item->menu_image
         . ($item->params->get('menu_text', 1) ? $title : ''))
     : $title;
 
-echo Nicepage_Theme_Nicepage::funcTagBuilder('a', $attributes, $linktype);
+echo Theme::funcTagBuilder('a', $attributes, $linktype);

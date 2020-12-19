@@ -6,9 +6,12 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Builder;
+
 defined('_JEXEC') or die;
 
-JLoader::register('DataBuilder', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Builder/DataBuilder.php');
+use \vmText, \shopFunctionsF, \VmConfig, \CurrencyDisplay, \vRequest;
+use \JRoute, \JURI;
 /**
  * Class ProductDataBuilder
  */

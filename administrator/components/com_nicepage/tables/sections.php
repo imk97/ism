@@ -124,4 +124,20 @@ class PagesTableSections extends JTable
         $db->setQuery($query);
         return $db->loadAssocList(null, 'page_id');
     }
+
+    /**
+     * Update id after page duplicating
+     *
+     * @param int $id Page id
+     */
+    public function updateDuplicatedPageId($id)
+    {
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+        $query->update('#__nicepage_sections');
+        $query->set($db->quoteName('page_id') . '=' . $id);
+        $query->where('page_id= 1000000');
+        $db->setQuery($query);
+        $db->query();
+    }
 }

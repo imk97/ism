@@ -7,9 +7,13 @@
  */
 defined('_JEXEC') or die;
 
+JLoader::register('NicepageHelpersNicepage', JPATH_ADMINISTRATOR . '/components/com_nicepage/helpers/nicepage.php');
+
+use NP\Editor\Editor;
+use NP\Factory;
+
 class PlgButtonNicepage extends JPlugin
 {
-    private $_editor = null;
     /**
      * PlgButtonNicepage constructor.
      *
@@ -32,12 +36,12 @@ class PlgButtonNicepage extends JPlugin
         }
         $this->updateDuplicatedPageId();
 
-        $this->_editor = new Nicepage_Editor();
-        $this->_editor->addCommonScript();
-        $this->_editor->addLinkDialogScript();
-        $this->_editor->addDataBridgeScript();
-        $this->_editor->addMainScript();
-        $this->_editor->includeScripts();
+        $editor = new Editor();
+        $editor->addCommonScript();
+        $editor->addLinkDialogScript();
+        $editor->addDataBridgeScript();
+        $editor->addMainScript();
+        $editor->includeScripts();
 
 
         $this->displayEditButton();
@@ -63,9 +67,6 @@ class PlgButtonNicepage extends JPlugin
             return false;
         }
 
-        JLoader::register('NicepageHelpersNicepage', JPATH_ADMINISTRATOR . '/components/com_nicepage/helpers/nicepage.php');
-        JLoader::register('Nicepage_Editor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/editor.php');
-
         return true;
     }
 
@@ -74,13 +75,8 @@ class PlgButtonNicepage extends JPlugin
      */
     public function updateDuplicatedPageId()
     {
-        $db = JFactory::getDBO();
-        $query = $db->getQuery(true);
-        $query->update('#__nicepage_sections');
-        $query->set($db->quoteName('page_id') . '=' . JFactory::getApplication()->input->get('id', ''));
-        $query->where('page_id= 1000000');
-        $db->setQuery($query);
-        $db->query();
+        $id = JFactory::getApplication()->input->get('id', '');
+        NicepageHelpersNicepage::getSectionsTable()->updateDuplicatedPageId($id);
     }
 
     /**
@@ -92,7 +88,7 @@ class PlgButtonNicepage extends JPlugin
         $template = JFactory::getApplication()->getTemplate();
         $start = $input->get('start', '0');
         $autostart = $input->get('autostart', '0');
-        $favicon = dirname($this->_editor->getAdminUrl()) . '/components/com_nicepage/assets/images/button-icon.png?r=' . md5(mt_rand(1, 100000));;
+        $favicon = dirname(dirname((JURI::current()))) . '/components/com_nicepage/assets/images/button-icon.png?r=' . md5(mt_rand(1, 100000));;
         $cssDisplay = ($start == '1' || $autostart == '1') ? 'none' : 'block';
         $css = <<<EOF
 body.editor>*:not(nav):not(.navbar-fixed-top) {
@@ -161,12 +157,22 @@ EOF;
      */
     public function displayScreenshots()
     {
-        if (!$this->_editor->getSections()) {
+        $aid = JFactory::getApplication()->input->get('id', '');
+
+        if (!$aid) {
             return;
         }
 
-        $content = NicepageHelpersNicepage::getSectionsScreenshots($this->_editor->getSections());
-        $content = str_replace('[[site_path_live]]', dirname($this->_editor->getAdminUrl()) . '/', $content);
+        $page = Factory::getPage($aid);
+
+        if (!$page) {
+            return;
+        }
+
+        $page->setPageView('thumbnail');
+        $content = $page->get();
+
+        $content = str_replace('[[site_path_live]]', dirname(dirname((JURI::current()))) . '/', $content);
         $content = call_user_func('base' . '64_encode', $content);
         $css = <<<EOF
 fieldset.adminform {

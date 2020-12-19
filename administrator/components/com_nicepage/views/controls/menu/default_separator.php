@@ -7,6 +7,8 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Utility\Theme;
+
 $linkClassName = isset($linkClassName) ? $linkClassName : '';
 $linkInlineStyles = isset($linkInlineStyles) ? $linkInlineStyles : '';
 
@@ -28,4 +30,4 @@ if ($item->menu_image) {
     }
 }
 
-echo Nicepage_Theme_Nicepage::funcTagBuilder('span', $attributes, $linktype);
+echo Theme::funcTagBuilder('span', $attributes, $linktype);

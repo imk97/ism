@@ -7,7 +7,9 @@
  */
 defined('_JEXEC') or die;
 
-JLoader::register('NpFactory', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/NpFactory.php');
+require_once JPATH_ADMINISTRATOR . '/components/com_nicepage/library/loader.php';
+
+use NP\Factory;
 /**
  * Class PlgContentNicepage
  */
@@ -54,14 +56,14 @@ class PlgSystemNicepage extends JPlugin
         if (preg_match('/<\!--np\_(content|landing)-->/', $pageContent) && preg_match('/<\!--np\_page_id-->([\s\S]+?)<\!--\/np\_page_id-->/', $pageContent, $matches)) {
             $pageId = $matches[1];
             $pageContent = str_replace($matches[0], '', $pageContent);
-            $page = NpFactory::getPage($pageId);
+            $page = Factory::getPage($pageId);
             if ($page) {
                 $pageContent = $page->get($pageContent);
             }
         }
 
         // Apply np settings to page
-        $config = NpFactory::getConfig();
+        $config = Factory::getConfig();
         $pageContent = $config->applySiteSettings($pageContent);
 
         //Add id attribute for typography parser

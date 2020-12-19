@@ -6,16 +6,31 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Processor;
+
 defined('_JEXEC') or die;
 
-JLoader::register('ContentModelCustomProducts', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Models/ContentModelCustomProducts.php');
+use NP\Models\ContentModelCustomProducts;
+use \vmJsApi, \JFactory;
 
 class ProductsProcessor
 {
     private $_products = array();
     private $_product = array();
+    private $_pageId;
 
     private $_quantityExists = false;
+
+    /**
+     * ProductsProcessor constructor.
+     *
+     * @param string $pageId Page id
+     */
+    public function __construct($pageId = '')
+    {
+        $this->_pageId = $pageId;
+    }
+
     /**
      * Process products
      *
@@ -107,8 +122,11 @@ class ProductsProcessor
         } else {
             $options = array('categoryName' => 'Recent products');
         }
+        $options['pageId'] = $this->_pageId;
         $this->_products = $this->_getProducts($options);
-        return preg_replace_callback('/<\!--product_item-->([\s\S]+?)<\!--\/product_item-->/', array(&$this, '_processProductItem'), $productHtml);
+        $productHtml = preg_replace_callback('/<\!--product_item-->([\s\S]+?)<\!--\/product_item-->/', array(&$this, '_processProductItem'), $productHtml);
+        $productHtml = '<div class="product-container">' . $productHtml . '</div>';
+        return $productHtml;
     }
 
     /**
@@ -126,7 +144,7 @@ class ProductsProcessor
         }
 
         $productItemHtml = str_replace('u-products-item ', 'u-products-item product ', $productItemHtml);
-        $productItemHtml = str_replace('u-product ', 'u-product product-container product ', $productItemHtml);
+        $productItemHtml = str_replace('u-product ', 'u-product product ', $productItemHtml);
 
         $this->_product = array_shift($this->_products);
         $productItemHtml = preg_replace_callback('/<\!--product_title-->([\s\S]+?)<\!--\/product_title-->/', array(&$this, '_setTitleData'), $productItemHtml);
@@ -293,6 +311,9 @@ class ProductsProcessor
         if (isset($controlOptions['clickType']) && $controlOptions['clickType'] === 'go-to-page') {
             $goToProduct = true;
         }
+        if ($this->_product['product-button-html'] && isset($controlOptions['content']) && $controlOptions['content']) {
+            $this->_product['product-button-text'] = $controlOptions['content'];
+        }
         $buttonHtml = preg_replace_callback(
             '/<\!--product_button_content-->([\s\S]+?)<\!--\/product_button_content-->/',
             function ($buttonContentMatch) {
@@ -418,10 +439,9 @@ class ProductsProcessor
         preg_match($variationRe, $variationsHtml, $variationMatch);
 
         $newVariationListHtml = '';
-        foreach ($variationsData as $variationData) {
+        foreach ($variationsData as $i => $variationData) {
             $newVariationHtml = str_replace('<select', '<select ' . $variationData['s_attributes'], $variationMatch[1]);
             $newVariationHtml = str_replace('u-input ', 'u-input ' . $variationData['s_classes'] . ' ', $newVariationHtml);
-            $newVariationHtml = preg_replace('/u-product-variant(.*?)/', 'u-product-variant product-field-display$1', $newVariationHtml);
             $newVariationHtml = preg_replace('/<\!--product_variation_label_content-->([\s\S]+?)<\!--\/product_variation_label_content-->/', $variationData['title'], $newVariationHtml);
             preg_match('/<\!--product_variation_option-->([\s\S]+?)<\!--\/product_variation_option-->/', $newVariationHtml, $optionMatch);
             $optionHtml = $optionMatch[1];
@@ -437,13 +457,16 @@ class ProductsProcessor
                 $newOptionHtml = str_replace('[[value]]', $option['value'], $newOptionHtml);
                 $newOptionsHtml .= $newOptionHtml;
             }
-
+            if ($i !== 0) {
+                $newVariationHtml = '<div style="margin-top: 10px;">' . $newVariationHtml . '</div>';
+            }
             $newVariationParts = preg_split('/<\!--product_variation_option-->([\s\S]+?)<\!--\/product_variation_option-->/', $newVariationHtml, -1, PREG_SPLIT_NO_EMPTY);
             $newVariationListHtml .= $newVariationParts[0] . $newOptionsHtml . $newVariationParts[1];
         }
 
         $variationsParts = preg_split($variationRe, $variationsHtml, -1, PREG_SPLIT_NO_EMPTY);
         $newVariationsHtml = $variationsParts[0] . $newVariationListHtml . $variationsParts[1];
+        $newVariationsHtml = str_replace('u-product-variations ', 'u-product-variations product-field-display ', $newVariationsHtml);
         return $newVariationsHtml;
     }
 

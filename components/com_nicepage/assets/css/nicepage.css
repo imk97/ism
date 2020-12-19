@@ -4401,7 +4401,6 @@ a {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   background-color: transparent;
   color: inherit;
-  text-align: inherit;
   height: auto;
 }
 .u-form-horizontal label,
@@ -5109,6 +5108,9 @@ a {
   position: relative;
   font-size: 1rem;
   height: auto !important;
+}
+.u-form-group {
+  text-align: start;
 }
 .u-btn-submit {
   display: inline-block;
@@ -14730,10 +14732,8 @@ a.pswp__share--download:hover {
   justify-content: space-between;
 }
 .u-cart-blocks-container {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
   position: relative;
 }

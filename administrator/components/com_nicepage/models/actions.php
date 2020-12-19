@@ -7,6 +7,11 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Uploader\FileUploader;
+use NP\Uploader\Chunk;
+use NP\Editor\SitePostsBuilder;
+use NP\Editor\MenuItemsSaver;
+
 /**
  * Class NicepageModelActions
  */
@@ -23,8 +28,6 @@ class NicepageModelActions extends JModelAdmin
         $adminComponentPath = JPATH_ADMINISTRATOR . '/components/com_nicepage';
         JLoader::register('Nicepage_Data_Mappers', $adminComponentPath . '/tables/mappers.php');
         JLoader::register('Nicepage_Data_Loader', $adminComponentPath . '/helpers/import.php');
-        JLoader::register('NpChunk', $adminComponentPath . '/library/src/Uploader/NpChunk.php');
-        JLoader::register('NpFileUploader', $adminComponentPath . '/library/src/Uploader/NpFileUploader.php');
 
         parent::__construct();
     }
@@ -61,7 +64,7 @@ class NicepageModelActions extends JModelAdmin
             return new JInput(json_decode(base64_decode($data->get('data', '', 'RAW')), true));
             break;
         case 'chunks':
-            $chunk = new NpChunk();
+            $chunk = new Chunk();
             $ret = $chunk->save($data);
             if (is_array($ret)) {
                 return array($ret);
@@ -145,8 +148,7 @@ class NicepageModelActions extends JModelAdmin
      * @return mixed|string
      */
     public function getSitePosts($data) {
-        JLoader::register('Nicepage_Site_Posts_Builder', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/posts.php');
-        $builder = new Nicepage_Site_Posts_Builder();
+        $builder = new SitePostsBuilder();
         return $this->_response(
             array(
                 'result' => 'done',
@@ -446,293 +448,9 @@ class NicepageModelActions extends JModelAdmin
     public function saveMenuItems($data)
     {
         $menuData = $data->get('menuData', '', 'RAW');
-
-        if (!$menuData) {
-            return $this->_response(
-                array(
-                    'status' => 'error',
-                    'message' => 'No data to save',
-                )
-            );
-        }
-
-        $menuItems = json_decode($menuData['menuItems'], true);
-        $menuOptions = $menuData['menuOptions'];
-        $originalMenuIds = isset($menuOptions['menuIds']) ? $menuOptions['menuIds'] : array();
-
-        JLoader::register('Nicepage_Data_Mappers', JPATH_ADMINISTRATOR . '/components/com_nicepage/tables/mappers.php');
-
-        $menusMapper = Nicepage_Data_Mappers::get('menu');
-        $menuItemsMapper = Nicepage_Data_Mappers::get('menuItem');
-        $siteMenuId = $menuOptions['siteMenuId'];
-        $home = $menuItemsMapper->find(array('home' => 1, 'menu' => $siteMenuId));
-
-        if (count($home) < 1) {
-            return $this->_response(
-                array(
-                    'status' => 'error',
-                    'message' => 'Default menu not found',
-                )
-            );
-        }
-        $homeItem = $home[0];
-
-        $rndMenu = $menusMapper->create();
-        $rndMenu->title = $rndMenu->menutype = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 10);
-        $status = $menusMapper->save($rndMenu);
-        if (is_string($status)) {
-            trigger_error($status, E_USER_ERROR);
-        }
-        $rndItem = $menuItemsMapper->create();
-        $rndItem->home = '1';
-        $rndItem->checked_out = $homeItem->checked_out;
-        $rndItem->menutype = $rndMenu->menutype;
-        $rndItem->alias = $rndItem->title = $rndMenu->menutype;
-        $rndItem->link = 'index.php?option=com_content&view=article&id=';
-        $rndItem->type = 'component';
-        $rndItem->component_id = '22';
-        $rndItem->params = $this->_paramsToString(array());
-        $status = $menuItemsMapper->save($rndItem);
-        if (is_string($status)) {
-            trigger_error($status, E_USER_ERROR);
-        }
-
-        $oldMenuItems = $menuItemsMapper->find(array('menu' => $siteMenuId));
-        $oldMenuLinks = array();
-        $extraMenuItems = array();
-        foreach ($oldMenuItems as $oldMenuItem) {
-            array_push($oldMenuLinks, $oldMenuItem->link);
-            $menuItemsMapper->delete($oldMenuItem->id);
-            if (array_search($oldMenuItem->id, $originalMenuIds) === false) {
-                array_push($extraMenuItems, $oldMenuItem);
-            }
-        }
-
-        $markedHomeItem = false;
-        foreach ($menuItems as &$menuItem) {
-            $menuItem['home'] = '0';
-            if ($homeItem->link == $menuItem['href']) {
-                $markedHomeItem = true;
-                $menuItem['home'] = '1';
-            }
-        }
-
-        $level = 0;
-        $parentIds = array();
-        $joomlaMenuIds = array();
-        foreach ($menuItems as $index => $itemData) {
-            $itemLevel = $itemData['level'];
-            $href = $itemData['href'];
-            $foundKey = array_search($href, $oldMenuLinks);
-            if ($foundKey !== false) {
-                $item = $oldMenuItems[$foundKey];
-                $item->id = null;
-            } else {
-                $item = $menuItemsMapper->create();
-                $item->menutype = $homeItem->menutype;
-
-                $type = 'custom';
-                if (preg_match('/^index\.php\?option=com_content&view=article&id=\d+/', $href)) {
-                    $type = 'single-article';
-                } else if (preg_match('/^index\.php\?option=com_content&view=category&layout=blog&id=\d+/', $href)) {
-                    $type = 'category-blog-layout';
-                }
-                switch ($type) {
-                case 'single-article':
-                    $item->link = $href;
-                    $item->type = 'component';
-                    $item->component_id = '22';
-                    $params = array
-                    (
-                        'show_title' => '1',
-                        'link_titles' => '',
-                        'show_intro' => '',
-                        'show_category' => '0',
-                        'link_category' => '',
-                        'show_parent_category' => '0',
-                        'link_parent_category' => '',
-                        'show_author' => '0',
-                        'link_author' => '',
-                        'show_create_date' => '0',
-                        'show_modify_date' => '0',
-                        'show_publish_date' => '0',
-                        'show_item_navigation' => '0',
-                        'show_vote' => '0',
-                        'show_icons' => '0',
-                        'show_print_icon' => '0',
-                        'show_email_icon' => '0',
-                        'show_hits' => '0',
-                        'show_noauth' => '',
-                        'menu-anchor_title' => '',
-                        'menu-anchor_css' => '',
-                        'menu_image' => '',
-                        'menu_text' => '1',
-                        'page_title' => '',
-                        'show_page_heading' => '0',
-                        'page_heading' => '',
-                        'pageclass_sfx' => '',
-                        'menu-meta_description' => '',
-                        'menu-meta_keywords' => '',
-                        'robots' => '',
-                        'secure' => '0',
-                        'page_title' => ''
-                    );
-                    break;
-                case 'category-blog-layout':
-                    $item->link = $href;
-                    $item->type = 'component';
-                    $item->component_id = '22';
-                    $params = array
-                    (
-                        'layout_type' => 'blog',
-                        'show_category_title' => '',
-                        'show_description' => '',
-                        'show_description_image' => '',
-                        'maxLevel' => '',
-                        'show_empty_categories' => '',
-                        'show_no_articles' => '',
-                        'show_subcat_desc' => '',
-                        'show_cat_num_articles' => '',
-                        'page_subheading' => '',
-                        'num_leading_articles' => '0',
-                        'num_intro_articles' => '4',
-                        'num_columns' => '1',
-                        'num_links' => '',
-                        'multi_column_order' => '',
-                        'show_subcategory_content' => '',
-                        'orderby_pri' => '',
-                        'orderby_sec' => 'order',
-                        'order_date' => '',
-                        'show_pagination' => '',
-                        'show_pagination_results' => '',
-                        'show_title' => '',
-                        'link_titles' => '',
-                        'show_intro' => '',
-                        'show_category' => '',
-                        'link_category' => '',
-                        'show_parent_category' => '',
-                        'link_parent_category' => '',
-                        'show_author' => '',
-                        'link_author' => '',
-                        'show_create_date' => '',
-                        'show_modify_date' => '',
-                        'show_publish_date' => '',
-                        'show_item_navigation' => '',
-                        'show_vote' => '',
-                        'show_readmore' => '',
-                        'show_readmore_title' => '',
-                        'show_icons' => '',
-                        'show_print_icon' => '',
-                        'show_email_icon' => '',
-                        'show_hits' => '',
-                        'show_noauth' => '',
-                        'show_feed_link' => '',
-                        'feed_summary' => '',
-                        'menu-anchor_title' => '',
-                        'menu-anchor_css' => '',
-                        'menu_image' => '',
-                        'menu_text' => 1,
-                        'page_title' => '',
-                        'show_page_heading' => 0,
-                        'page_heading' => '',
-                        'pageclass_sfx' => '',
-                        'menu-meta_description' => '',
-                        'menu-meta_keywords' => '',
-                        'robots' => '',
-                        'secure' => 0,
-                        'page_title' => ''
-                    );
-                    break;
-                default:
-                    $item->link = $href;
-                    $item->type = 'url';
-                    $item->component_id = '0';
-                    $params = array
-                    (
-                        'menu-anchor_title' => '',
-                        'menu-anchor_css' => '',
-                        'menu_image' => '',
-                        'menu_text' => 1
-                    );
-                }
-                $item->params = $this->_paramsToString($params);
-            }
-            $item->home = $itemData['home'];
-            $item->title = $itemData['name'];
-
-            if (JFactory::getConfig()->get('unicodeslugs') == 1) {
-                $alias = JFilterOutput::stringURLUnicodeSlug($item->title);
-            } else {
-                $alias = JFilterOutput::stringURLSafe($item->title);
-            }
-            if (JTable::getInstance('Menu')->load(array('alias' => $alias))) {
-                $date = new JDate();
-                $alias = $date->format('Y-m-d-H-i-s');
-            }
-            $item->alias = $alias;
-
-            if (!$markedHomeItem && preg_match('/index\.php\?option=/', $href)) {
-                $item->home = 1;
-                $markedHomeItem = true;
-            }
-
-            if ($itemLevel == 0) {
-                $parentId = 1;
-                $parentIds = array('0' => 1);
-            } else if ($itemLevel > $level) {
-                $parentId = $menuItems[$index - 1]['joomla_id'];
-                $parentIds[$itemLevel] = $parentId;
-            } else {
-                $parentId = $parentIds[$itemLevel];
-            }
-            $level = $itemLevel;
-
-            $item->setLocation($parentId, 'last-child');
-
-
-            $status = $menuItemsMapper->save($item);
-            if (is_string($status)) {
-                trigger_error($status, E_USER_ERROR);
-            }
-
-            $menuItems[$index]['joomla_id'] = $item->id;
-            array_push($joomlaMenuIds, $item->id);
-        }
-
-        foreach ($extraMenuItems as $extraMenuItem) {
-            $extraMenuItem->id = null;
-            $status = $menuItemsMapper->save($extraMenuItem);
-            if (is_string($status)) {
-                trigger_error($status, E_USER_ERROR);
-            }
-        }
-
-        if ($rndMenu) {
-            $status = $menusMapper->delete($rndMenu->id);
-            if (is_string($status)) {
-                trigger_error($status, E_USER_ERROR);
-            }
-        }
-
-        $modules = Nicepage_Data_Mappers::get('module');
-        $moduleList = $modules->find(array('scope' => 'site', 'module' => 'mod_menu'));
-        foreach ($moduleList as $moduleListItem) {
-            $params = $this->_stringToParams($moduleListItem->params);
-            $menutype = $params['menutype'];
-            if ($menutype !== $siteMenuId) {
-                continue;
-            }
-            $modules->enableOn($moduleListItem->id, $joomlaMenuIds);
-        }
-
-        return $this->_response(
-            array(
-                'result' => 'done',
-                'menuOptions' => array(
-                    'menuIds' => $joomlaMenuIds,
-                )
-            )
-        );
+        $menuItemsSaver = new MenuItemsSaver($menuData);
+        $result = $menuItemsSaver->save();
+        return $this->_response($result);
     }
 
     /**
@@ -984,7 +702,7 @@ class NicepageModelActions extends JModelAdmin
      */
     public function clearChunks($data) {
         $id = $data->get('id', '', 'RAW');
-        NpChunk::clearChunksById($id);
+        Chunk::clearChunksById($id);
         return $this->_response(
             array(
                 'result' => 'done'
@@ -1339,7 +1057,7 @@ class NicepageModelActions extends JModelAdmin
             if (!$unzipHere) {
                 throw new Exception("Upload dir don't writable");
             }
-            $uploader = new NpFileUploader();
+            $uploader = new FileUploader();
             $result = $uploader->upload($unzipHere, $isLast);
             if ($result['status'] == 'done') {
                 $contentDir = $this->_contentUnZip($unzipHere);
@@ -1382,7 +1100,7 @@ class NicepageModelActions extends JModelAdmin
             if (!$uploadHere) {
                 throw new Exception("Upload dir $uploadHere don't writable");
             }
-            $uploader = new NpFileUploader();
+            $uploader = new FileUploader();
             $result = $uploader->upload($uploadHere, $isLast);
             if ($result['status'] == 'done') {
                 return $this->_response(

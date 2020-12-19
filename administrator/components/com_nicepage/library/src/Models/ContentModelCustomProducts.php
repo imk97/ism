@@ -6,9 +6,14 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Models;
+
 defined('_JEXEC') or die;
 
-JLoader::register('ProductDataBuilder', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Builder/ProductDataBuilder.php');
+use NP\Builder\ProductDataBuilder;
+
+use \JFactory, \JRoute, \JComponentHelper;
+use \VmModel, \vRequest, \VmConfig, \vmJsApi, \vmDefines, \vmLanguage;
 
 class ContentModelCustomProducts
 {
@@ -98,21 +103,8 @@ class ContentModelCustomProducts
 
         foreach ($items as $index => $item) {
             if ($index == 0) { // for product details control
-                $customfieldsModel = VmModel::getModel('Customfields');
                 if (!empty($item->customfields)) {
-                    /*
-                     * Set for dynamic content change
-                     * vRequest::setVar('view','productdetails');
-                    */
-                    $customfieldsModel->displayProductCustomfieldFE($item, $item->customfields);
-                    $item->customfieldsSorted = array();
-                    foreach ($item->customfields as $k => $custom) {
-                        if (!empty($custom->layout_pos)) {
-                            $item->customfieldsSorted[$custom->layout_pos][] = $custom;
-                        } else {
-                            $item->customfieldsSorted['normal'][] = $custom;
-                        }
-                    }
+                    $item = $this->_displayProductCustomfieldFE($item);
                 }
                 $item->withRating = $item->showRating = $ratingModel->showRating($item->virtuemart_product_id);
                 if ($item->withRating) {
@@ -174,6 +166,72 @@ class ContentModelCustomProducts
             $result['link'] = $matches[2];
         }
         return $result;
+    }
+
+    /**
+     * Build variation custom fields
+     *
+     * @param object $item Product object
+     *
+     * @return mixed
+     */
+    private function _displayProductCustomfieldFE($item) {
+        /*
+        * Set for dynamic content change
+        * vRequest::setVar('view','productdetails');
+        */
+        vRequest::setVar('view', 'productdetails');
+        $customfieldsModel = VmModel::getModel('Customfields');
+        $customfieldsModel->displayProductCustomfieldFE($item, $item->customfields);
+
+        $stockhandle = VmConfig::get('stockhandle_products', false) && $item->product_stockhandle ? $item->product_stockhandle : VmConfig::get('stockhandle', 'none');
+        $extra = ' and ( published = "1" ';
+        if ($stockhandle == 'disableit_children') {
+            $extra .= ' AND (`product_in_stock` - `product_ordered`) > "0" ';
+        }
+        $extra .= ')';
+
+        $productModel = VmModel::getModel('product');
+        $item->customfieldsSorted = array();
+
+        foreach ($item->customfields as $k => $customfield) {
+            if (!empty($customfield->layout_pos)) {
+                $item->customfieldsSorted[$customfield->layout_pos][] = $customfield;
+            } else {
+                $item->customfieldsSorted['normal'][] = $customfield;
+            }
+            if ($customfield->field_type == 'C' && empty($customfield->selectType)) {
+                $avail = $productModel->getProductChildIds($customfield->virtuemart_product_id, $extra);
+                if (!in_array($customfield->virtuemart_product_id, $avail)) {
+                    array_unshift($avail, $customfield->virtuemart_product_id);
+                }
+                foreach ($customfield->options as $product_id => $variants) {
+                    if (!in_array($product_id, $avail)) {
+                        continue;
+                    }
+                    $getParamPageId = isset($this->_options['pageId']) && $this->_options['pageId'] ? '&pageId=' . $this->_options['pageId'] : '';
+                    $url = JRoute::_('index.php?option=com_nicepage&task=product&virtuemart_category_id=' . $item->virtuemart_category_id . '&virtuemart_product_id=' . $product_id . $getParamPageId, false);
+                    $jsArray[] = '["' . $url . '","' . implode('","', $variants) . '"]';
+                }
+
+                $jsVariants = implode(',', $jsArray);
+                $selector = 'select[data-cvsel="field' . $customfield->virtuemart_customfield_id . '"]';
+                $hash = md5($selector);
+                $j = "jQuery(document).ready(function($) {
+                            Virtuemart.setBrowserState = false;
+							$('" . $selector . "').off('change', Virtuemart.cvFind);
+							$('" . $selector . "').on('change', { variants:[" . $jsVariants . "] }, Virtuemart.cvFind);
+						});";
+                vmJsApi::addJScript('npvars' . $hash, $j, true, false, false, $hash);
+            }
+            $scripts = vmJsApi::getJScripts();
+            foreach ($scripts as $name => $script) {
+                if (strpos($name, 'cvselvars') !== false) { //remove vm scripts for select
+                    vmJsApi::removeJScript($name);
+                }
+            }
+        }
+        return $item;
     }
 
     /**

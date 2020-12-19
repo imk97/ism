@@ -7,6 +7,8 @@
  */
 defined('_JEXEC') or die;
 
+require_once JPATH_ADMINISTRATOR . '/components/com_nicepage/library/loader.php';
+
 $controller = JControllerLegacy::getInstance('Nicepage');
 $controller->execute(JFactory::getApplication()->input->get('task', 'display'));
 $controller->redirect();

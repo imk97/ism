@@ -7,6 +7,8 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Processor\PositionsProcessor;
+
 /**
  * Style function for blocks on the page
  *

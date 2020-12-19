@@ -7,8 +7,10 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Utility\Theme;
+
 if (isset($controlProps) && isset($controlTemplate)) {
-    $logoInfo = Nicepage_Theme_Nicepage::getLogoInfo(
+    $logoInfo = Theme::getLogoInfo(
         array(
             'src' => $controlProps['src'],
             'href' => $controlProps['href'],

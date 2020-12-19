@@ -7,8 +7,10 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Utility\Theme;
+
 if (isset($controlProps) && isset($controlTemplate)) {
-    $siteTitle = Nicepage_Theme_Nicepage::getThemeParams('siteTitle');
+    $siteTitle = Theme::getThemeParams('siteTitle');
     $content = '';
     if ($siteTitle) {
         $content = $siteTitle;

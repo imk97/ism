@@ -6,9 +6,16 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Builder;
+
 defined('_JEXEC') or die;
 
-JLoader::register('DataBuilder', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Builder/DataBuilder.php');
+use \JFactory, \JHtml, \JLoader, \JURI, \JLayoutFile;
+use \JRoute, \JComponentHelper, \JText;
+
+\JLoader::register('ContentHelperRoute', JPATH_ROOT . '/components/com_content/helpers/route.php');
+use \ContentHelperRoute;
+
 /**
  * Class PostDataBuilder
  */
@@ -29,8 +36,6 @@ class PostDataBuilder extends DataBuilder
         $lang->load('com_content', JPATH_BASE . '/components/com_content', null, false, true);
 
         JHtml::addIncludePath(JPATH_BASE . '/components/com_content/helpers');
-
-        JLoader::register('ContentHelperRoute', JPATH_ROOT . '/components/com_content/helpers/route.php');
 
         $this->_item = $item;
 

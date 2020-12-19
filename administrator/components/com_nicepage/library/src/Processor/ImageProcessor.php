@@ -5,8 +5,12 @@
  * @copyright Copyright (c) 2016 - 2019 Nicepage
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
+
+namespace NP\Processor;
+
 defined('_JEXEC') or die;
 
+use \JURI;
 /**
  * Class ImageProcessor
  */

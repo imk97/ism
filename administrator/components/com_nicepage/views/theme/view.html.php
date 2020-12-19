@@ -7,7 +7,8 @@
  */
 defined('_JEXEC') or die;
 
-JLoader::register('Nicepage_Editor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/editor.php');
+use NP\Editor\Editor;
+
 /**
  * Class NicepageViewTheme
  */
@@ -20,7 +21,7 @@ class NicepageViewTheme extends JViewLegacy
      */
     public function display($tpl = null)
     {
-        $editor = new Nicepage_Editor();
+        $editor = new Editor();
         $editor->addCommonScript();
         $editor->addLinkDialogScript();
         $editor->addDataBridgeScript();

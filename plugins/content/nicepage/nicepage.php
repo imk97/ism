@@ -7,8 +7,9 @@
  */
 defined('_JEXEC') or die;
 
-JLoader::register('NpFactory',               JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/NpFactory.php');
-JLoader::register('NicepageHelpersNicepage', JPATH_ADMINISTRATOR . '/components/com_nicepage/helpers/nicepage.php');
+require_once JPATH_ADMINISTRATOR . '/components/com_nicepage/library/loader.php';
+
+use NP\Factory;
 
 /**
  * Class PlgContentNicepage
@@ -27,7 +28,7 @@ class PlgContentNicepage extends JPlugin
             return;
         }
 
-        $page = NpFactory::getPage($row->id, $context, $row, $params);
+        $page = Factory::getPage($row->id, $context, $row, $params);
 
         if (!$page) {
             return;

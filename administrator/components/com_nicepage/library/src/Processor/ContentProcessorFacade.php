@@ -6,14 +6,9 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
-defined('_JEXEC') or die;
+namespace NP\Processor;
 
-JLoader::register('CommonProcessor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/CommonProcessor.php');
-JLoader::register('ControlsProcessor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/ControlsProcessor.php');
-JLoader::register('PositionsProcessor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/PositionsProcessor.php');
-JLoader::register('BlogProcessor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/BlogProcessor.php');
-JLoader::register('ProductsProcessor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/ProductsProcessor.php');
-JLoader::register('ShoppingCartProcessor', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/ShoppingCartProcessor.php');
+defined('_JEXEC') or die;
 
 class ContentProcessorFacade
 {
@@ -51,7 +46,7 @@ class ContentProcessorFacade
             $blog = new BlogProcessor();
             $content = $blog->process($content);
 
-            $products = new ProductsProcessor();
+            $products = new ProductsProcessor($this->_pageId);
             $content = $products->process($content);
 
             $shoppingCart = new ShoppingCartProcessor();

@@ -7,6 +7,8 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Processor\PositionsProcessor;
+
 ob_start();
 ?>
     <?php echo $menuProps['menu_template']; ?>

@@ -6,9 +6,12 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Builder;
+
 defined('_JEXEC') or die;
 
-JLoader::register('TagBalancer', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Utility/TagBalancer.php');
+use NP\Utility\TagBalancer;
+
 /**
  * Class DataBuilder
  */

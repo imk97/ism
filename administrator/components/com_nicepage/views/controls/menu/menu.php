@@ -7,6 +7,8 @@
  */
 defined('_JEXEC') or die;
 
+require_once  JPATH_ADMINISTRATOR . '/components/com_nicepage/helpers/modules.php';
+
 if (isset($controlProps)) {
     $doc = JFactory::getDocument();
     if (strpos($controlProps['position'], 'hmenu-') !== false && !$doc->countModules($controlProps['position'])) {

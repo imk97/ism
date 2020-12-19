@@ -7,7 +7,9 @@
  */
 defined('_JEXEC') or die;
 
-JLoader::register('ContentProcessorFacade', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Processor/ContentProcessorFacade.php');
+use NP\Processor\ContentProcessorFacade;
+use NP\Utility\Utility;
+
 /**
  * Class NicepageHelpersNicepage
  */
@@ -142,8 +144,7 @@ class NicepageHelpersNicepage
      */
     public static function getEditorSettings()
     {
-        $current = dirname(dirname((JURI::current())));
-        $index = $current . '/administrator/index.php?option=com_nicepage&task=actions.';
+        $index = self::getSiteUrl() . '/administrator/index.php?option=com_nicepage&task=actions.';
         return array(
             'actions' => array(
                 'uploadFile' => $index . 'uploadFile',
@@ -157,14 +158,14 @@ class NicepageHelpersNicepage
                 'saveSiteSettings' => $index . 'saveSiteSettings',
                 'savePreferences' => $index . 'savePreferences',
                 'saveMenuItems' => $index . 'saveMenuItems',
-                'getPosts' => $current . '/index.php?option=com_nicepage&task=posts',
-                'getProducts' => $current . '/index.php?option=com_nicepage&task=products',
+                'getPosts' => self::getSiteUrl() . '/index.php?option=com_nicepage&task=posts',
+                'getProducts' => self::getSiteUrl() . '/index.php?option=com_nicepage&task=products',
             ),
             'uploadFileOptions' => array(
                 'formFileName' => 'async-upload'
             ),
-            'dashboardUrl' => $current . '/administrator/',
-            'editPostUrl' => $current . '/administrator/index.php?option=com_content&view=article&layout=edit&id={id}'
+            'dashboardUrl' => self::getSiteUrl() . '/administrator/',
+            'editPostUrl' => self::getSiteUrl() . '/administrator/index.php?option=com_content&view=article&layout=edit&id={id}'
         );
     }
 
@@ -175,37 +176,7 @@ class NicepageHelpersNicepage
      */
     public static function getMaxRequestSize()
     {
-        $postSize = self::toBytes(ini_get('post_max_size'));
-        $uploadSize = self::toBytes(ini_get('upload_max_filesize'));
-        $memorySize = self::toBytes(ini_get('memory_limit'));
-
-        return min($postSize, $uploadSize, $memorySize);
-    }
-
-    /**
-     * Option value to bytes value
-     *
-     * @param string $str Option value
-     *
-     * @return int
-     */
-    public static function toBytes($str)
-    {
-        $str = strtolower(trim($str));
-        $size = intval($str);
-        if ($str && strlen($size) !== strlen($str)) {
-            $unit = $str[strlen($str) - 1];
-            $size = substr($str, 0, -1);
-            switch ($unit) {
-            case 'g':
-                $size *= 1024;
-            case 'm':
-                $size *= 1024;
-            case 'k':
-                $size *= 1024;
-            }
-        }
-        return $size;
+        return Utility::getMaxRequestSize();
     }
 
     /**
@@ -216,10 +187,10 @@ class NicepageHelpersNicepage
     public static function getCmsSettings()
     {
         return array(
-            'defaultImageUrl' => dirname(dirname((JURI::current()))) . '/components/com_nicepage/assets/images/nicepage-images/default-image.jpg',
-            'defaultLogoUrl' => dirname(dirname((JURI::current()))) . '/components/com_nicepage/assets/images/nicepage-images/default-logo.png',
+            'defaultImageUrl' => self::getSiteUrl() . '/components/com_nicepage/assets/images/nicepage-images/default-image.jpg',
+            'defaultLogoUrl' => self::getSiteUrl() . '/components/com_nicepage/assets/images/nicepage-images/default-logo.png',
             'isFirstStart' => false,
-            'maxRequestSize' => self::getMaxRequestSize(),
+            'maxRequestSize' => Utility::getMaxRequestSize(),
             'isWhiteLabelPlugin' => pathinfo(dirname(dirname(__FILE__)), PATHINFO_BASENAME) != ('com_' . 'n' . 'i' . 'c' . 'e' . 'p' . 'a' . 'g' . 'e')
         );
     }
@@ -408,63 +379,6 @@ class NicepageHelpersNicepage
             $props['pageCssUsedIds'] = json_encode($parts);
             $page->save(array('props' => $props));
         }
-    }
-
-    /**
-     * @param object $sectionsObj sections page object
-     *
-     * @return mixed|string
-     */
-    public static function getSectionsScreenshots($sectionsObj)
-    {
-        if (!$sectionsObj) {
-            return '';
-        }
-
-        $props = $sectionsObj->props;
-        $publishHtml = isset($props['publishHtml']) ? $props['publishHtml'] : '';
-        $bodyClass = isset($props['bodyClass']) ? $props['bodyClass'] : '';
-        $bodyStyle = isset($props['bodyStyle']) ? $props['bodyStyle'] : '';
-        $head = isset($props['head']) ? $props['head'] : '';
-        $fonts = isset($props['fonts']) ? $props['fonts'] : '';
-        $pageCssUsedIds = isset($props['pageCssUsedIds']) ? $props['pageCssUsedIds'] : '';
-        $publishHtml = self::processSectionsHtml($publishHtml, false);
-        preg_match_all('/<section[\s\S]+?<\/section>/', $publishHtml, $matches, PREG_SET_ORDER);
-        $count = count($matches);
-        if ($count > 4) {
-            for ($i = 4; $i < $count; $i++) {
-                $publishHtml = str_replace($matches[$i], '', $publishHtml);
-            }
-        }
-
-        $nicepageCss = JURI::root(true) . '/components/com_nicepage/assets/css/nicepage.css';
-
-        include_once  dirname(JPATH_PLUGINS) . '/administrator/components/com_nicepage/helpers/nicepage.php';
-        $params = NicepageHelpersNicepage::getConfig();
-        $siteStyleCss = NicepageHelpersNicepage::buildSiteStyleCss($params, $pageCssUsedIds, $publishHtml, $sectionsObj->page_id);
-
-        $ret = <<<EOF
-<!DOCTYPE html>
-<html>        
-    <head>
-    <style>
-        body {
-            cursor: pointer;
-        }
-    </style>
-    <link rel="stylesheet" href="$nicepageCss">
-    $fonts
-    <style>
-    	$siteStyleCss
-        $head
-    </style>
-    </head>
-    <body class="$bodyClass" style="$bodyStyle">
-        $publishHtml
-    </body>
-</html>
-EOF;
-        return $ret;
     }
 
     /**

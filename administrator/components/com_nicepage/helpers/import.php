@@ -360,6 +360,9 @@ class Nicepage_Data_Loader
                 if ($index == 'default') {
                     continue;
                 }
+                if ($foundHomeItem && $index == 'home') {
+                    continue;
+                }
                 $menu = $menusMapper->create();
                 $menu->title = $menuData['caption'];
                 $menu->menutype = $menuData['name'];
@@ -710,7 +713,9 @@ class Nicepage_Data_Loader
                 continue;
             }
             foreach ($menuData['items'] as $itemData) {
-                $contentMenuItems[] = $itemData['joomla_id'];
+                if (isset($itemData['joomla_id'])) {
+                    $contentMenuItems[] = $itemData['joomla_id'];
+                }
             }
         }
 

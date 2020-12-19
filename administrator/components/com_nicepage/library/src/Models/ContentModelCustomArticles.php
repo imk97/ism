@@ -6,9 +6,15 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
  */
 
+namespace NP\Models;
+
 defined('_JEXEC') or die;
 
-JLoader::register('PostDataBuilder', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Builder/PostDataBuilder.php');
+use NP\Builder\PostDataBuilder;
+use \NicepageHelpersNicepage;
+use \ContentModelArticles;
+use \JRegistry, \JLoader, \JHelperTags;
+
 JLoader::register('ContentModelArticles', JPATH_ROOT . '/components/com_content/models/articles.php');
 
 /**

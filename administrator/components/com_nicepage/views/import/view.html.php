@@ -7,6 +7,7 @@
  */
 defined('_JEXEC') or die;
 
+use NP\Utility\Utility;
 /**
  * Class NicepageViewImport
  */
@@ -19,7 +20,7 @@ class NicepageViewImport extends JViewLegacy
      */
     public function display($tpl = null)
     {
-        $this->maxRequestSize = NicepageHelpersNicepage::getMaxRequestSize();
+        $this->maxRequestSize = Utility::getMaxRequestSize();
         $this->adminUrl = dirname(dirname((JURI::current()))) . '/administrator';
         JToolbarHelper::title(JText::_('COM_NICEPAGE_IMPORT_HEADER'));
 

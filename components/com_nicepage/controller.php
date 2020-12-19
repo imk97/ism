@@ -7,8 +7,11 @@
  */
 defined('_JEXEC') or die;
 
-JLoader::register('ContentModelCustomArticles', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Models/ContentModelCustomArticles.php');
-JLoader::register('ContentModelCustomProducts', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Models/ContentModelCustomProducts.php');
+use NP\Models\ContentModelCustomArticles;
+use NP\Models\ContentModelCustomProducts;
+use NP\Processor\ProductsProcessor;
+use NP\Utility\ReCaptcha;
+
 JLoader::register('Nicepage_Data_Mappers', JPATH_ADMINISTRATOR . '/components/com_nicepage/tables/mappers.php');
 JLoader::register('NicepageHelpersNicepage', JPATH_ADMINISTRATOR . '/components/com_nicepage/helpers/nicepage.php');
 
@@ -37,6 +40,46 @@ class NicepageController extends JControllerLegacy
         }
 
         return parent::display($cachable, $urlparams);
+    }
+
+    /**
+     * Get product content
+     */
+    public function product() {
+        $input = JFactory::getApplication()->input;
+        $pageId = $input->get('pageId', 0);
+        $productId = $input->get('virtuemart_product_id', 0);
+        $dynamic = $input->get('dynamic', '0');
+
+        if ($dynamic == '1') {
+            $page = NicepageHelpersNicepage::getSectionsTable();
+            if (!$page->load(array('page_id' => $pageId))) {
+                exit(1);
+            }
+
+            $publishHtml = isset($page->props['publishHtml']) ? $page->props['publishHtml'] : '';
+            if (!$publishHtml) {
+                exit(1);
+            }
+
+            $productHtml = '';
+            if (preg_match('/<\!--product-->([\s\S]+?)<\!--\/product-->/', $publishHtml, $productMatches)) {
+                $productHtml = $productMatches[0];
+                $jsonRe = '/<\!--product_options_json--><\!--([\s\S]+?)--><\!--\/product_options_json-->/';
+                if (preg_match($jsonRe, $productMatches[1], $optionsMatches)) {
+                    $productOptions = json_decode($optionsMatches[1], true);
+                    $productOptions['source'] = $productId;
+                    $productHtml = str_replace($optionsMatches[1], json_encode($productOptions), $productHtml);
+                }
+            }
+
+            if ($productHtml) {
+                $products = new ProductsProcessor($pageId);
+                $productHtml = $products->process($productHtml);
+                exit($productHtml);
+            }
+        }
+        exit(1);
     }
 
     /**
@@ -462,12 +505,11 @@ class NicepageController extends JControllerLegacy
 
         if ($input->exists('recaptchaResponse')) {
             $response = $input->get('recaptchaResponse', '', 'RAW');
-            JLoader::register('NpReCaptcha', JPATH_ADMINISTRATOR . '/components/com_nicepage/library/src/Utility/NpReCaptcha.php');
             $config = NicepageHelpersNicepage::getConfig();
             if (isset($config['siteSettings'])) {
                 $settings = json_decode($config['siteSettings'], true);
                 if (isset($settings['captchaSecretKey']) && $settings['captchaSecretKey']) {
-                    $recaptcha = new NpReCaptcha($settings['captchaSecretKey']);
+                    $recaptcha = new ReCaptcha($settings['captchaSecretKey']);
                     $result = $recaptcha->verifyResponse($response);
                     if (!$result->success) {
                         // Not verified - show form error
