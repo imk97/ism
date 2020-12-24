@@ -1,0 +1,46 @@
+#tagcloud{
+	width:250px;
+	height:260px;
+	position:relative;
+	font-size:12px;
+	color:#333;
+	margin:20px auto 0;
+	text-align:center;
+}
+/* #tagcloud a{
+	position:absolute;
+	top:0px;
+	left:0px;
+	color:#333;
+	font-family:Arial;
+	text-decoration:none;
+	margin:0 10px 15px 0;
+	line-height:18px;
+	text-align:center;
+	font-size:12px;
+	padding:1px 5px;
+	/* display:inline-block; 
+	border-radius:3px; 
+} */
+
+#tagcloud p {
+	position: absolute;
+  	
+}
+
+#tagcloud p.tagc1{
+	background:#666;
+	color:#fff;
+}
+#tagcloud p.tagc2{
+	background:#F16E50;
+	color:#fff;
+}
+#tagcloud p.tagc3{
+	background:#DED402;
+	color:#000;
+}
+#tagcloud p:hover{
+	color:#fff;
+	background:#0099ff;
+}

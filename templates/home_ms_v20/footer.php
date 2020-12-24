@@ -106,19 +106,19 @@ function getIPAddress() {
                 </p>
                 <p class="u-text u-text-13">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-14">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-4" href="#">Penafian</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-4" href="/ism/index.php/ms/penafian">Penafian</a>
                 </p>
                 <p class="u-text u-text-15">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-16">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-5" href="#">Dasar Keselamatan</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-5" href="/ism/index.ph/ms/dasar-keselamatan">Dasar Keselamatan</a>
                 </p>
                 <p class="u-align-left u-text u-text-17">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-18">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-6" href="#">Dasar Privasi</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-6" href="/ism/index.ph/ms/dasar-privasi">Dasar Privasi</a>
                 </p>
                 <p class="u-text u-text-19">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-20">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-7" href="#">Hubungi Kami</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-7" href="/ism/index.ph/ms/hubungi-kami">Hubungi Kami</a>
                 </p>
               </div>
             </div>

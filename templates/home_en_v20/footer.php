@@ -20,12 +20,12 @@
             <div class="u-container-style u-group u-group-1">
               <div class="u-container-layout u-container-layout-2">
                 <p class="u-text u-text-7">
-                  <a href="http://waze.to/?ll=3.07707,101.70194&navigate=yes" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">Waze<br>
+                  <a href="http://waze.to/?ll=3.07707,101.70194&navigate=yes" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" target="_blank">Waze<br>
                   </a>
                 </p>
                 <p class="u-text u-text-8">|</p>
                 <p class="u-text u-text-9">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-2" href="https://www.google.com.my/maps/place/Institut+Sosial+Malaysia/@3.0768594,101.6997953,17z/data=!3m1!4b1!4m2!3m1!1s0x31cc4a7959c4d5f3:0xf19d482899add6e?hl=en&shorturl=1">Google Maps</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-2" href="https://www.google.com.my/maps/place/Institut+Sosial+Malaysia/@3.0768594,101.6997953,17z/data=!3m1!4b1!4m2!3m1!1s0x31cc4a7959c4d5f3:0xf19d482899add6e?hl=en&shorturl=1" target="_blank">Google Maps</a>
                 </p>
               </div>
             </div>
@@ -102,24 +102,24 @@ function getIPAddress() {
             <div class="u-container-style u-expanded-width-xs u-group u-group-2">
               <div class="u-container-layout u-container-layout-4">
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-12">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-3" href="#">Site Map</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-3" href="/ism/index.php/en/site-map">Site Map</a>
                 </p>
                 <p class="u-text u-text-13">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-14">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-4" href="#">Disclaimer<br>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-4" href="/ism/index.php/en/disclaimer">Disclaimer<br>
                   </a>
                 </p>
                 <p class="u-text u-text-15">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-16">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-5" href="#">Safety Policy</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-5" href="/ism/index.php/en/safety-policy">Safety Policy</a>
                 </p>
                 <p class="u-align-left u-text u-text-17">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-18">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-6" href="#">Privacy Policy</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-6" href="/ism/index.php/en/privacy-policy">Privacy Policy</a>
                 </p>
                 <p class="u-text u-text-19">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-20">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-7" href="#">Contact Us</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-7" href="/ism/index.php/en/contact-us">Contact Us</a>
                 </p>
               </div>
             </div>

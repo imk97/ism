@@ -53,26 +53,26 @@
               <div class="u-container-layout u-container-layout-5">
                 <div class="u-container-style u-group u-shape-rectangle u-group-4">
                   <div class="u-container-layout u-container-layout-6">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-11" data-image-width="74" data-image-height="64" data-href="#">
-                    <a href="#" class="u-btn u-button-style u-none u-btn-1">Soalan Lazim</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-11" data-image-width="74" data-image-height="64" data-href="/ism/index.php/ms/korporat/soalan-lazim">
+                    <a href="/ism/index.php/ms/korporat/soalan-lazim" class="u-btn u-button-style u-none u-btn-1">Soalan Lazim</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-5">
                   <div class="u-container-layout u-container-layout-7">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-12" data-image-width="58" data-image-height="52" data-href="#">
-                    <a href="#" class="u-btn u-button-style u-none u-btn-2">Hubungi Kami</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-12" data-image-width="58" data-image-height="52" data-href="/ism/index.php/ms/hubungi-kami">
+                    <a href="/ism/index.php/ms/hubungi-kami" class="u-btn u-button-style u-none u-btn-2">Hubungi Kami</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-6">
                   <div class="u-container-layout u-valign-top u-container-layout-8">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-13" data-image-width="70" data-image-height="63" data-href="#">
-                    <a href="#" class="u-btn u-button-style u-none u-btn-3">Peta Laman</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-13" data-image-width="70" data-image-height="63" data-href="/ism/index.php/ms/peta-laman">
+                    <a href="/ism/index.php/ms/peta-laman" class="u-btn u-button-style u-none u-btn-3">Peta Laman</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-7">
                   <div class="u-container-layout u-container-layout-9">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-14" data-image-width="74" data-image-height="63" data-href="#">
-                    <a href="#" class="u-btn u-button-style u-expanded-width u-none u-btn-4">Aduan &amp;&nbsp;Maklumbalas</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-14" data-image-width="74" data-image-height="63" onclick="window.open('https://kpwkm.spab.gov.my/eApps/system/index.do') ">
+                    <a href="https://kpwkm.spab.gov.my/eApps/system/index.do" target="_blank" class="u-btn u-button-style u-expanded-width u-none u-btn-4" target="_blank">Aduan &amp;&nbsp;Maklumbalas</a>
                   </div>
                 </div>
               </div>

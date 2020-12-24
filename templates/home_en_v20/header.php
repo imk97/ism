@@ -53,26 +53,26 @@
               <div class="u-container-layout u-container-layout-5">
                 <div class="u-container-style u-group u-shape-rectangle u-group-4">
                   <div class="u-container-layout u-container-layout-6">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-11" data-image-width="74" data-image-height="64" data-href="#">
-                    <a href="index.php/en/faq" class="u-btn u-button-style u-none u-btn-1">FAQ</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/faq.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-11" data-image-width="74" data-image-height="64" data-href="/ism/index.php/en/corporate/faq">
+                    <a href="/ism/index.php/en/corporate/faq" class="u-btn u-button-style u-none u-btn-1">FAQ</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-5">
                   <div class="u-container-layout u-container-layout-7">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-12" data-image-width="58" data-image-height="52" data-href="#">
-                    <a href="index.php/en/contact-us" class="u-btn u-button-style u-none u-btn-2">Contact Us</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/hubungi.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-12" data-image-width="58" data-image-height="52" data-href="/ism/index.php/en/contact-us">
+                    <a href="/ism/index.php/en/contact-us" class="u-btn u-button-style u-none u-btn-2">Contact Us</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-6">
                   <div class="u-container-layout u-valign-top u-container-layout-8">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-13" data-image-width="70" data-image-height="63" data-href="#">
-                    <a href="#" class="u-btn u-button-style u-none u-btn-3">Site Map</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/peta.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-13" data-image-width="70" data-image-height="63" data-href="/ism/index.php/en/site-map">
+                    <a href="/ism/index.php/en/site-map" class="u-btn u-button-style u-none u-btn-3">Site Map</a>
                   </div>
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-7">
                   <div class="u-container-layout u-container-layout-9">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-14" data-image-width="74" data-image-height="63" data-href="#">
-                    <a href="https://kpwkm.spab.gov.my/eApps/system/index.do" class="u-btn u-button-style u-expanded-width u-none u-btn-4">Complaint &amp;&nbsp;Feedback</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-14" data-image-width="74" data-image-height="63" onclick="window.open('https://kpwkm.spab.gov.my/eApps/system/index.do')">
+                    <a href="https://kpwkm.spab.gov.my/eApps/system/index.do" target="_blank" class="u-btn u-button-style u-expanded-width u-none u-btn-4" target="_blank">Complaint &amp;&nbsp;Feedback</a>
                   </div>
                 </div>
               </div>
