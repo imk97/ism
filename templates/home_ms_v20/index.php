@@ -127,7 +127,7 @@ $(document).ready( function() {
       var inc = parseInt(style.fontSize) + 2
       //var inc2 = parseInt(style2.fontSize) + 2
       if(inc <= 20) {
-        $("ul, .u-body").css('font-size', inc)
+        $("ul, .u-body, .custom").css('font-size', inc)
         // $(".u-group-3").setAttribute('font-size', inc)
           console.log("success")
       }
@@ -138,7 +138,7 @@ $(document).ready( function() {
 
       var dec = parseInt(style.fontSize) - 2
       if(dec >= 12) {
-        $("ul, .u-body").css('font-size', dec)
+        $("ul, .u-body, .custom").css('font-size', dec)
         console.log("decrease")
       }
 
@@ -146,7 +146,7 @@ $(document).ready( function() {
 
     $('#default').click(function () {
       console.log("default")
-        $("ul, .u-body").css('font-size', 16)
+        $("ul, .u-body, .custom").css('font-size', 16)
         //$("u-custom-font").css('font-size', 12)
     })
 

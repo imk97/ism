@@ -102,7 +102,7 @@ function getIPAddress() {
             <div class="u-container-style u-expanded-width-xs u-group u-group-2">
               <div class="u-container-layout u-container-layout-4">
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-12">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-3" href="#">Peta Laman</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-3" href="/ism/index.php/ms/peta-laman">Peta Laman</a>
                 </p>
                 <p class="u-text u-text-13">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-14">
@@ -110,15 +110,15 @@ function getIPAddress() {
                 </p>
                 <p class="u-text u-text-15">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-16">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-5" href="/ism/index.ph/ms/dasar-keselamatan">Dasar Keselamatan</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-5" href="/ism/index.php/ms/dasar-keselamatan">Dasar Keselamatan</a>
                 </p>
                 <p class="u-align-left u-text u-text-17">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-18">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-6" href="/ism/index.ph/ms/dasar-privasi">Dasar Privasi</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-6" href="/ism/index.php/ms/dasar-privasi">Dasar Privasi</a>
                 </p>
                 <p class="u-text u-text-19">|</p>
                 <p class="u-custom-font u-font-arial u-text u-text-palette-1-base u-text-20">
-                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-7" href="/ism/index.ph/ms/hubungi-kami">Hubungi Kami</a>
+                  <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-7" href="/ism/index.php/ms/hubungi-kami">Hubungi Kami</a>
                 </p>
               </div>
             </div>
