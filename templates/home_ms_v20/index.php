@@ -45,6 +45,7 @@ $indexDir = dirname(__FILE__);
     
     <?php echo CoreStatements::head(); ?>
     <meta name="theme-color" content="#478ac9">
+    <?php include_once "$indexDir/styles.php"; ?>
     <link rel="stylesheet" href="<?php echo $templateUrl; ?>/css/default.css" media="screen" type="text/css" />
     <?php if($this->view->isFrontEditing()) : ?>
         <link rel="stylesheet" href="<?php echo $templateUrl; ?>/css/frontediting.css" media="screen" type="text/css" />
@@ -52,7 +53,6 @@ $indexDir = dirname(__FILE__);
     <link rel="stylesheet" href="<?php echo $templateUrl; ?>/css/template.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="<?php echo $templateUrl; ?>/css/media.css" id="theme-media-css" media="screen" type="text/css" />
     <link id="u-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Oswald:200,300,400,500,600,700">
-    <?php include_once "$indexDir/styles.php"; ?>
     <?php if ($this->params->get('jquery', '0') == '1') : ?>
         <script src="<?php echo $templateUrl; ?>/scripts/jquery.js"></script>
     <?php endif; ?>

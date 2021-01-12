@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.6" client="site" method="upgrade">
+	<name>MOD_HEADLINEMARQUEE_NAME</name>
+	<author>Simon Champion</author>
+	<creationDate>November 2016</creationDate>
+    <copyright>Copyright (C) 2016 Simon Champion.</copyright>
+    <license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <authorEmail>simon@simonchampion.net</authorEmail>
+	<version>2.3.0</version>
+	<description>MOD_HEADLINEMARQUEE_DESCRIPTION</description>
+	<files>
+		<filename module="mod_headlinemarquee">mod_headlinemarquee.php</filename>
+		<folder>headlineGenerators</folder>
+		<folder>models</folder>
+		<folder>tmpl</folder>
+		<folder>layout</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_headlinemarquee.sys.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_headlinemarquee.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/modules/mod_headlinemarquee/models/fields">
+                <field name="scrollDirection" type="list" description="MOD_HEADLINEMARQUEE_SCROLLDIR_DESC" label="MOD_HEADLINEMARQUEE_SCROLLDIR_LABEL" default="left">
+                    <option value="left">MOD_HEADLINEMARQUEE_SCROLLDIR_RTL</option>
+                    <option value="right">MOD_HEADLINEMARQUEE_SCROLLDIR_LTR</option>
+                    <option value="up">MOD_HEADLINEMARQUEE_SCROLLDIR_UP</option>
+                    <option value="down">MOD_HEADLINEMARQUEE_SCROLLDIR_DOWN</option>
+                </field>
+                <field
+                    name="duration"
+                    type="text"
+                    label="MOD_HEADLINEMARQUEE_DURATION_LABEL"
+                    description="MOD_HEADLINEMARQUEE_DURATION_DESC"
+                    default="5000" />
+                <field name="pauseOnHover" type="radio" description="MOD_HEADLINEMARQUEE_PAUSE_DESC" label="MOD_HEADLINEMARQUEE_PAUSE_LABEL" class="btn-group btn-group-yesno" default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="linksOpenInNewTab" type="radio" description="MOD_HEADLINEMARQUEE_NEWTAB_DESC" label="MOD_HEADLINEMARQUEE_NEWTAB_LABEL" class="btn-group btn-group-yesno" default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field
+                    name="headlines"
+                    type="Headlines"
+                    label="MOD_HEADLINEMARQUEE_FIELDSFROMPLUGINS_LABEL"
+                    description="MOD_HEADLINEMARQUEE_FIELDSFROMPLUGINS_DESC"
+                    />
+                <field
+                    name="numberOfHeadlines"
+                    type="text"
+                    description="MOD_HEADLINEMARQUEE_QUANTITY_DESC"
+                    label="MOD_HEADLINEMARQUEE_QUANTITY_LABEL"
+                    default="5" />
+                <field
+                    name="separation"
+                    type="text"
+                    description="MOD_HEADLINEMARQUEE_SEPARATION_DESC"
+                    label="MOD_HEADLINEMARQUEE_SEPARATION_LABEL"
+                    default="10" />
+                <field name="separatorBullet" type="radio" description="MOD_HEADLINEMARQUEE_SEPARATOR_DESC" label="MOD_HEADLINEMARQUEE_SEPARATOR_LABEL" class="btn-group btn-group-yesno" default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field
+                    name="textBeforeSource"
+                    type="textarea"
+                    label="MOD_HEADLINEMARQUEE_TEXTBEFORE_LABEL"
+                    description="MOD_HEADLINEMARQUEE_TEXTBEFORE_DESC"
+                    filter="safehtml"
+                    default="" />
+                <field
+                    name="textAfterSource"
+                    type="textarea"
+                    label="MOD_HEADLINEMARQUEE_TEXTAFTER_LABEL"
+                    description="MOD_HEADLINEMARQUEE_TEXTAFTER_DESC"
+                    filter="safehtml"
+                    default="" />
+                <field name="beforeAndAfterHTML" type="radio" description="MOD_HEADLINEMARQUEE_ALLOWHTML_DESC" label="MOD_HEADLINEMARQUEE_ALLOWHTML_LABEL" class="btn-group btn-group-yesno" default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field
+                    name="cssClass"
+                    type="text"
+                    label="MOD_HEADLINEMARQUEE_CSSCLASS_LABEL"
+                    description="MOD_HEADLINEMARQUEE_CSSCLASS_DESC"
+                    default="headlineMarquee" />
+            </fieldset>
+		</fields>
+	</config>
+	<updateservers>
+		<server type="extension" name="HIBP Update site">https://github.com/Spudley/mod_headlinemarquee/blob/master/update.xml</server>
+	</updateservers>
+</extension>
