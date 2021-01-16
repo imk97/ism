@@ -50,7 +50,7 @@ class headlineMarqueeProcessor
         foreach ($headlines as $headline) {
             list($text, $url) = $headline;
             if($url) {
-                $text = "<a href='{$url}' {$target}>{$text}</a>";
+                $text = "<a style='color: black;' href='{$url}' {$target}>{$text}</a>";
             }
             $output[] = "<span class='marqueeItem'>{$text}</span>";
         }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8.0" type="plugin" group="content" method="upgrade">
+	<name>PLG_CONTENT_BFACCORDION</name>
+  <creationDate>29 March 2018</creationDate>
+  <author>Jonathan Brain</author>
+  <authorEmail>brainforge@btinternet.com</authorEmail>
+  <authorUrl>http://www.brainforge.co.uk</authorUrl>
+  <copyright>Copyright 2018-2020 Jonathan Brain. All rights reserved.</copyright>
+  <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+  <version>3.9.14</version>
+
+	<description>PLG_CONTENT_BFACCORDION_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="bfaccordion">bfaccordion.php</filename>
+        <folder>help</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_content_bfaccordion.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_content_bfaccordion.sys.ini</language>
+	</languages>
+
+	<config>
+        <fields name="params">
+            <fieldset name="css"
+                      label="PLG_CONTENT_BFACCORDION_CSS_FIELDSET">
+
+                <field
+                        name="cssnote" type="note"
+                        description="PLG_CONTENT_BFACCORDION_CSS_FIELDSET_DESC" />
+
+                <field
+                        name="cssmode" type="radio" class="btn-group"
+                        label="PLG_CONTENT_BFACCORDION_CSSMODE_LABEL" default="0">
+                    <option value="0">JOFF</option>
+                    <option value="1">JON</option>
+                </field>
+
+                <field
+                        name="customcss" type="textarea"
+                        label="PLG_CONTENT_BFACCORDION_CSSCUSTOM_LABEL"
+                        showon="cssmode:1"
+                        filter="raw"
+                        rows="10"
+                        cols="20"
+                        default="PLG_CONTENT_BFACCORDION_CSSCUSTOM_DEFAULT">
+                </field>
+            </fieldset>
+
+            <fieldset name="js"
+                      label="PLG_CONTENT_BFACCORDION_JS_FIELDSET">
+                <field
+                        name="jsnote" type="note"
+                        description="PLG_CONTENT_BFACCORDION_JS_FIELDSET_DESC" />
+
+                <field
+                        name="jsmode" type="radio" class="btn-group"
+                        label="PLG_CONTENT_BFACCORDION_JSMODE_LABEL"
+                        default="1">
+                    <option value="0">JOFF</option>
+                    <option value="1">JON</option>
+                </field>
+
+                <field
+                        name="customjs" type="textarea"
+                        label="PLG_CONTENT_BFACCORDION_JSCUSTOM_LABEL"
+                        showon="jsmode:1"
+                        filter="raw"
+                        rows="10"
+                        cols="20"
+                        default="">
+                </field>
+            </fieldset>
+        </fields>
+	</config>
+
+	<updateservers>
+		<server type="extension" priority="1" name="Content - Create accordion in article by BrainforgeUK.">
+			https://brainforge.co.uk/component/bfupdater?element=plg_content_bfaccordion.xml
+		</server>
+	</updateservers>
+</extension>
