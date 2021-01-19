@@ -20,7 +20,7 @@ if ($item->menu_image)
 
     if ($item->params->get('menu_text', 1))
     {
-        $linktype .= '<span class="image-title">' . $item->title . '</span>';
+        $linktype .= '<span class="image-title">' . $item->title . '</span><i class="fa">&#xf0d7;</i>';
     }
 }
 

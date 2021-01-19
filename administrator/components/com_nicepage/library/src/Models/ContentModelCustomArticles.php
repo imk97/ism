@@ -66,8 +66,18 @@ class ContentModelCustomArticles extends ContentModelArticles
         $this->setState('list.ordering', 'modified');
         $this->setState('list.direction', 'DESC');
         $this->setState('list.start', 0);
-        $this->setState('list.limit', 20);
+        $limit = 25;
+        if (isset($this->_options['count']) && $this->_options['count']) {
+            $limit = $this->_options['count'];
+        }
+        $this->setState('list.limit', (int) $limit);
         $this->setState('params', new JRegistry());
+        // exclude np pages
+        $sectionsPageIds = NicepageHelpersNicepage::getSectionsTable()->getAllPageIds();
+        if (count($sectionsPageIds) > 0) {
+            $this->setState('filter.article_id', $sectionsPageIds);
+            $this->setState('filter.article_id.include', false);
+        }
     }
 
     /**
@@ -83,14 +93,9 @@ class ContentModelCustomArticles extends ContentModelArticles
      * @return array
      */
     public function getPosts() {
-        // exclude np pages
-        $sectionsPageIds = NicepageHelpersNicepage::getSectionsTable()->getAllPageIds();
         $posts = array();
         $items = $this->getItems();
         foreach ($items as $key => $item) {
-            if (in_array($item->id, $sectionsPageIds)) {
-                continue;
-            }
             $builder = new PostDataBuilder($item);
             $post = $builder->getData();
             array_push($posts, $post);

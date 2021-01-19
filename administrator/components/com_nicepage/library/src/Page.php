@@ -65,13 +65,7 @@ class Page
         $props = $this->_pageTable->getProps();
         $this->_config = NicepageHelpersNicepage::getConfig($props['isPreview']);
 
-        $this->_props = $this->prepareProps(
-            $props,
-            $this->_config,
-            $this->_context,
-            $this->_row,
-            $this->_params
-        );
+        $this->_props = $this->prepareProps($props);
 
         if (isset($props['pageView'])) {
             $this->_pageView = $props['pageView'];
@@ -98,6 +92,9 @@ class Page
      * Build page elements
      */
     public function buildPageElements() {
+        if ($this->_buildedPageElements) {
+            return;
+        }
         $this->setPageProperties();
         $this->setScripts();
         $this->setStyles();
@@ -250,9 +247,7 @@ class Page
      * @return mixed|string|string[]|null
      */
     public function get($pageContent = '') {
-        if (!$this->_buildedPageElements) {
-            $this->buildPageElements();
-        }
+        $this->buildPageElements();
 
         if ($this->_pageView === 'thumbnail') {
             return $this->buildThumbnail();
@@ -774,47 +769,55 @@ HTML;
     /**
      * Prepare page props
      *
-     * @param array  $props          Page props
-     * @param array  $comConfig      Plg config
-     * @param string $articleContext Article context
-     * @param object $article        Article
-     * @param object $articleParams  Article params
+     * @param array $props Page props
      *
      * @return mixed
      */
-    public function prepareProps($props, $comConfig, $articleContext, $article, $articleParams) {
-        // Process image paths
-        $props['publishHtml'] = $this->fixImagePaths($props['publishHtml']);
-        $props['head']        = $this->fixImagePaths($props['head']);
-        $props['bodyStyle']   = $this->fixImagePaths($props['bodyStyle']);
-        $props['fonts']       = $this->fixImagePaths($props['fonts']);
-
-        // Process backlink
-        if ($comConfig) {
-            $hideBacklink = isset($comConfig['hideBacklink']) ? (bool)$comConfig['hideBacklink'] : false;
-            $backlink = $props['backlink'];
-            $props['backlink'] = $hideBacklink ? str_replace('u-backlink', 'u-backlink u-hidden', $backlink) : $backlink;
-        }
-
-        // Process content
-        if ($article) {
-            $article->doubleСall = true;
-            $currentText = $article->text;
-            $currentPostId = $article->id;
-            $article->text = $props['publishHtml'];
-            $article->id = '-1';
-            JPluginHelper::importPlugin('content');
-            $dispatcher = JEventDispatcher::getInstance();
-            $dispatcher->trigger('onContentPrepare', array($articleContext, &$article, &$articleParams, 0));
-            $props['publishHtml'] = $article->text;
-            $article->text = $currentText;
-            $article->id = $currentPostId;
-        }
+    public function prepareProps($props)
+    {
         $props['bodyClass']   = isset($props['bodyClass']) ? $props['bodyClass'] : '';
         $props['bodyStyle']   = isset($props['bodyStyle']) ? $props['bodyStyle'] : '';
         $props['head']        = isset($props['head']) ? $props['head'] : '';
         $props['fonts']       = isset($props['fonts']) ? $props['fonts'] : '';
         $props['publishHtml'] = isset($props['publishHtml']) ? $props['publishHtml'] : '';
+
+        $onContentPrepare = true;
+        $publishHtml = $props['publishHtml'];
+        if ($this->_row && property_exists($this->_row, 'text')) {
+            $text = $this->_row->text;
+            if (preg_match('/<\!--np\_fulltext-->([\s\S]+?)<\!--\/np\_fulltext-->/', $text, $fullTextMatches)) {
+                $publishHtml = $fullTextMatches[1];
+                $onContentPrepare = false;
+            }
+        }
+
+        // Process image paths
+        $props['publishHtml'] = $this->fixImagePaths($publishHtml);
+        $props['head']        = $this->fixImagePaths($props['head']);
+        $props['bodyStyle']   = $this->fixImagePaths($props['bodyStyle']);
+        $props['fonts']       = $this->fixImagePaths($props['fonts']);
+
+        // Process backlink
+        if ($this->_config) {
+            $hideBacklink = isset($this->_config['hideBacklink']) ? (bool)$this->_config['hideBacklink'] : false;
+            $backlink = $props['backlink'];
+            $props['backlink'] = $hideBacklink ? str_replace('u-backlink', 'u-backlink u-hidden', $backlink) : $backlink;
+        }
+
+        // Process content
+        if ($onContentPrepare && $this->_row) {
+            $this->_row->doubleСall = true;
+            $currentText = $this->_row->text;
+            $currentPostId = $this->_row->id;
+            $this->_row->text = $props['publishHtml'];
+            $this->_row->id = '-1';
+            JPluginHelper::importPlugin('content');
+            $dispatcher = JEventDispatcher::getInstance();
+            $dispatcher->trigger('onContentPrepare', array($this->_context, &$this->_row, &$this->_params, 0));
+            $props['publishHtml'] = $this->_row->text;
+            $this->_row->text = $currentText;
+            $this->_row->id = $currentPostId;
+        }
 
         $props['backlink']       = isset($props['backlink']) ? $props['backlink'] : '';
         $props['pageCssUsedIds'] = isset($props['pageCssUsedIds']) ? $props['pageCssUsedIds'] : '';

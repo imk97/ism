@@ -49,6 +49,48 @@
             </div>
             <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/iso1-removebg-preview.png" alt="" class="u-image u-image-default u-image-2" data-image-width="662" data-image-height="243">
             <div class="u-custom-php u-expanded-width-md u-custom-php-1"><?php
+$server = "localhost";
+$username = "root";
+$password = "";
+$db = "ism";
+
+try {
+    $connection = new PDO("mysql:host=$server;dbname=$db;", $username, $password);
+
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo "Connected successfully";
+
+    $ip = getIPAddress();
+    $ipadd = long2ip(intVal($ip));
+    // echo $ipadd;
+
+    $date = date('Y-m-d');
+    $query = $connection->query("SELECT count(*) FROM gr8os_visitor WHERE ipaddress = '$ipadd' AND date = '$date' ");
+    $result = $query->fetchColumn();
+
+    // echo $result;
+    if ($result == 0) {
+        $connection->exec("INSERT INTO gr8os_visitor (ipaddress) VALUES ('$ipadd')");
+    }
+
+    // $query = $connection->query("SELECT INET_NTOA(total) FROM gr8os_visitor");
+    // $num = $query->fetchColumn();
+    // echo $num;
+
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
+function getIPAddress() {
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $address = $_SERVER['HTTP_CLIENT_IP'];
+    } else {
+        $address = $_SERVER['REMOTE_ADDR'];
+    }
+    return $address;
+}
 ?></div>
             <div class="custom-footer u-clearfix u-custom-html u-custom-html-2">
               <div class="container">

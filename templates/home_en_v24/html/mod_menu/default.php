@@ -77,7 +77,7 @@ if ('' !== $menuType && file_exists($modPath . '/hmenu/default_hmenu_' . $attrib
     	// The next item is deeper.
     	if ($item->deeper)
     	{
-    		echo '<ul class="nav-child unstyled small">';
+    		echo '<ul class="nav-child unstyled small" style="margin-top: 1px; margin-bottom: 1px;>';
     	}
     	// The next item is shallower.
     	elseif ($item->shallower)

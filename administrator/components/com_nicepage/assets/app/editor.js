@@ -3,7 +3,7 @@
 
 var EditorUtility = {};
 
-(function() {
+(function () {
     'use strict';
 
     EditorUtility.downloadByteArrayInline = function downloadByteArrayInline(url, withCredentials, numberOfTries, callback) {
@@ -74,11 +74,11 @@ var EditorUtility = {};
     };
 })();
 
-var DataUploader = (function() {
+var DataUploader = (function () {
     'use strict';
 
     function convertToBase64(content) {
-        return btoa(encodeURIComponent(content).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return btoa(encodeURIComponent(content).replace(/%([0-9A-F]{2})/g, function (match, p1) {
             return String.fromCharCode(parseInt(p1, 16))
         }));
     }
@@ -94,7 +94,7 @@ var DataUploader = (function() {
                 'post': window.nicepageSettings.ajaxData,
                 'url': window.nicepageSettings.actions.clearChunks
             }
-        }, function(error, response) {
+        }, function (error, response) {
             if (!error) {
                 sessionStorage.setItem('saveType', 'chunks');
             }
@@ -104,7 +104,7 @@ var DataUploader = (function() {
 
     function saveAsBase64(url, data, callback) {
         var dataBase64 = convertToBase64(JSON.stringify(data));
-        doRequest(url, { saveType: 'base64', data: dataBase64 }, function(error, response) {
+        doRequest(url, {saveType: 'base64', data: dataBase64}, function (error, response) {
             if (error || (response && response.result === 'error')) {
                 saveAsChunk(url, data, callback);
             } else {
@@ -180,7 +180,7 @@ var DataUploader = (function() {
             return;
         }
 
-        EditorUtility.downloadByteArrayInline(imageData.data, false, 1, function(error, array) {
+        EditorUtility.downloadByteArrayInline(imageData.data, false, 1, function (error, array) {
             if (error) {
                 callback(error);
                 return;
@@ -293,7 +293,7 @@ function ImageUploader(fileData, options, callback) {
     'use strict';
 
     var type = options.type || '';
-    var file = new Blob([fileData], { type: type });
+    var file = new Blob([fileData], {type: type});
 
     this.upload = function upload() {
 
@@ -322,11 +322,11 @@ function ImageUploader(fileData, options, callback) {
                 var result;
                 try {
                     result = JSON.parse(response);
-                } catch(e) {
+                } catch (e) {
                     callback(EditorUtility.createError(options.url, xhr));
                     return;
                 }
-                if(result.status === 'error') {
+                if (result.status === 'error') {
                     callback(EditorUtility.createError(options.url, xhr));
                 } else {
                     callback(null, result);
@@ -399,7 +399,7 @@ function FileUploader(fileData, callback) {
     function createChunk(data, params) {
         var formData = new FormData();
         formData.append('filename', fileName);
-        formData.append('chunk', new Blob([data], { type: 'application/octet-stream' }), 'blob');
+        formData.append('chunk', new Blob([data], {type: 'application/octet-stream'}), 'blob');
 
         var paramsData = $.extend(true, {uploadId: Math.random()}, params, window.nicepageSettings.uploadFileOptions && window.nicepageSettings.uploadFileOptions.params);
 
@@ -444,7 +444,7 @@ function FileUploader(fileData, callback) {
         var result;
         try {
             result = JSON.parse(response);
-        } catch(e) {
+        } catch (e) {
             callback(EditorUtility.createError(window.nicepageSettings.actions.uploadFile, xhr));
             return;
         }
@@ -528,6 +528,10 @@ var appEditor = (function () {
         }, function (error, response) {
             if (error) {
                 callback(error);
+                return;
+            }
+            if (!response.data) {
+                callback(new Error('appEditor ~ DataUploader.savePage ~ response.data is undefined'));
                 return;
             }
             window.nicepageSettings.pageId = response.data.id;

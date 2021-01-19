@@ -10,7 +10,7 @@ namespace NP\Builder;
 
 defined('_JEXEC') or die;
 
-use \vmText, \shopFunctionsF, \VmConfig, \CurrencyDisplay, \vRequest;
+use \vmText, \shopFunctionsF, \VmConfig, \vmJsApi, \CurrencyDisplay, \vRequest;
 use \JRoute, \JURI;
 /**
  * Class ProductDataBuilder

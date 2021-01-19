@@ -97,7 +97,8 @@ class ProductsProcessor
         } else {
             $productsSource = isset($productsOptions['source']) && $productsOptions['source'] ? $productsOptions['source'] : '';
         }
-        $this->_products = $this->_getProducts(array('categoryName' => $productsSource));
+        $productsCount = isset($productsOptions['count']) ? $productsOptions['count'] : '';
+        $this->_products = $this->_getProducts(array('categoryName' => $productsSource, 'count' => $productsCount));
         $this->_quantityExists = false;
         return preg_replace_callback('/<\!--product_item-->([\s\S]+?)<\!--\/product_item-->/', array(&$this, '_processProductItem'), $productsHtml);
     }

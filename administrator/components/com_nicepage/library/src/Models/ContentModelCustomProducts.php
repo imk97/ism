@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 use NP\Builder\ProductDataBuilder;
 
 use \JFactory, \JRoute, \JComponentHelper;
-use \VmModel, \vRequest, \VmConfig, \vmJsApi, \vmDefines, \vmLanguage;
+use \VmModel, \vRequest, \VmConfig, \vmJsApi, \vmDefines, \vmLanguage, \VirtueMartCart;
 
 class ContentModelCustomProducts
 {
@@ -76,7 +76,12 @@ class ContentModelCustomProducts
             }
 
             $product_group = $isFeatured ? 'featured' : 'latest';
-            $max_items = 20;
+
+            $max_items = 25;
+            if (isset($this->_options['count']) && $this->_options['count']) {
+                $max_items = $this->_options['count'];
+            }
+
             $show_price = true;
             $filter_manufacturer = false;
             $manufacturer_id = null;

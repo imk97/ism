@@ -8,6 +8,8 @@
 
 namespace NP\Utility;
 
+use \stdClass;
+
 defined('_JEXEC') or die;
 
 /**

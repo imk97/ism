@@ -150,9 +150,11 @@ class Editor
             $fileList = JFolder::files($filesPath, $extsParts, true, true);
             foreach ($fileList as $key => $file) {
                 $fileName = basename($file);
+                $encodedFileName = htmlentities($fileName);
                 $path = str_replace(DIRECTORY_SEPARATOR, '/', JPath::clean($file));
                 $fileLink = str_replace($root, dirname($this->getAdminUrl()), $path);
-                array_push($result, array('url' => $fileLink, 'title' => $fileName));
+                $fileLink = str_replace($fileName, $encodedFileName, $fileLink);
+                array_push($result, array('url' => $fileLink, 'title' => $encodedFileName));
             }
         }
         return $result;

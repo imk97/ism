@@ -42,9 +42,10 @@ $indexDir = dirname(__FILE__);
         <link href="<?php echo $faviconPath; ?>" rel="icon" type="image/x-icon" />
     <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php echo CoreStatements::head(); ?>
     <meta name="theme-color" content="#478ac9">
+    <!--<link href="<?php //echo $templateUrl; ?>/css/icon-awesome.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="<?php echo $templateUrl; ?>/css/default.css" media="screen" type="text/css" />
     <?php if($this->view->isFrontEditing()) : ?>
         <link rel="stylesheet" href="<?php echo $templateUrl; ?>/css/frontediting.css" media="screen" type="text/css" />
@@ -96,9 +97,18 @@ $indexDir = dirname(__FILE__);
     renderSeoTags($document->seoTags);
     ?>
     <?php endif; ?>
-    
-    
-    
+  
+    <style>
+    /*ul > li.parent > div.u-nav-popup > ul > li.parent {
+      content: "\25bc";
+    }*/
+      
+    nav > div > ul > li.u-nav-item.parent > a::after {
+      content: "\25bc"; 
+      float:right;
+      font-size: 10px;
+    }
+    </style>
 </head>
 <body <?php echo $bodyClass . $bodyStyle; ?>>
 <?php $this->view->renderHeader($indexDir, $this->params); ?>
@@ -108,4 +118,80 @@ $indexDir = dirname(__FILE__);
 
 <?php echo $backToTop; ?>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+$(document).ready( function() {
+    var currentSize = document.querySelector('.u-body') //body
+    var size = document.querySelector('.u-custom-font') //custom-font
+    var style = getComputedStyle(currentSize)
+    //var style2 = getComputedStyle(size)
+    console.log(style.fontSize)
+    //console.log(style2.fontSize)
+    $('#inc').click( function() {
+      
+      console.log("increase")
+      console.log(style.fontSize)
+      //console.log(parseInt(style.fontSize)+2)
+      //console.log($('.u-body').css('font-size', parseInt(style.fontSize)+2))
+      //var inc = $('.u-body').css('font-size', parseInt(style.fontSize) + 2)
+      var inc = parseInt(style.fontSize) + 2
+      //var inc2 = parseInt(style2.fontSize) + 2
+      if(inc <= 20) {
+        $("ul, .u-body, .custom").css('font-size', inc)
+        // $(".u-group-3").setAttribute('font-size', inc)
+          console.log("success")
+      }
+      
+    })
+
+    $('#dec').click( function() {
+
+      var dec = parseInt(style.fontSize) - 2
+      if(dec >= 12) {
+        $("ul, .u-body, .custom").css('font-size', dec)
+        console.log("decrease")
+      }
+
+    })
+
+    $('#default').click(function () {
+      console.log("default")
+        $("ul, .u-body, .custom").css('font-size', 16)
+        //$("u-custom-font").css('font-size', 12)
+    })
+
+    // Blue
+    $('#blue').click( function () {
+      console.log("blue")
+      //$(".u-header, u-custom-font").css('color', '#39B0EB')
+      $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #39B0EB)')
+      $('.color_custom, .header-change, .footer-change').css('background-color', '#d1d8d8')
+    })
+
+    // Grey
+    $('#grey').click( function () {
+      console.log("grey")
+		//$(".u-header, header").css('color', '#d1d8d8')
+      $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #d1d8d8)')
+      $('.color_custom, .header-change, .footer-change, .content').css('background-color', '#AF601A')
+    })
+
+    // Mint Green
+    $('#mintgreen').click( function () {
+      console.log("mint green")
+      //$('.u-header, header').css('color', '#98ff98')
+      $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #98ff98)')
+      $('.color_custom, .header-change, .footer-change, .content').css('background-color', '#d1d8d8')
+    })
+      
+    // Black
+    $('#black').click( function() {
+      //$('.u-header, header').css('color', '#000000')
+      $('.u-header, .u-footer').css('background-image', 'linear-gradient(to right, white, #ebac05)')
+      $('.color_custom, .header-change, .footer-change').css('background-color', '#ebac05')
+      $('.content').css({'background-color':'#ebac05', 'background-image': ''})
+    })
+
+})
+</script>
 </html>

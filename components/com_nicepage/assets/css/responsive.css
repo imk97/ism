@@ -10,7 +10,7 @@
 }
 .u-sm  .u-form-horizontal .u-form-group,
 .u-xs  .u-form-horizontal .u-form-group {
-  margin: 0.5rem !important;
+  border: 0.5rem solid transparent !important;
 }
 .u-sm  .u-form-horizontal label,
 .u-xs  .u-form-horizontal label {

@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 <div class = "breadcrumbs<?php echo $moduleclass_sfx; ?>">
 <?php if ($params->get('showHere', 1))
 	{
-		echo '<span class="showHere">' .JText::_('MOD_BREADCRUMBS_HERE').' &nbsp;</span>';
+		echo '<span class="showHere">' .JText::_('MOD_BREADCRUMBS_HERE').'</span>';
 	}
 
 	// Get rid of duplicated entries on trail including home page when using multilanguage

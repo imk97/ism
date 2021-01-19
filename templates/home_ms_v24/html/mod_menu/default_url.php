@@ -23,8 +23,8 @@ switch ($item->browserNav) {
             . '\'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes\');return false;';
         break;
 }
-
-$title = '<span>' . $item->title . '</span>';
+//&nbsp;<i class="fa">&#xf0d7;</i><i class="fa">&#xf0da;</i>
+$title = '<span>' . $item->title . '</span>&nbsp;';
 
 $linktype = $item->menu_image
     ? ('<img src="' . $item->menu_image . '" alt="' . $item->title . '" />'

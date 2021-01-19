@@ -10,6 +10,8 @@ namespace NP\Processor;
 
 defined('_JEXEC') or die;
 
+use NP\Models\ContentModelCustomProducts;
+
 class ShoppingCartProcessor
 {
     private $_cart = array();

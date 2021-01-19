@@ -53,7 +53,8 @@ class BlogProcessor
         } else {
             $blogSource = isset($blogOptions['source']) && $blogOptions['source'] ? $blogOptions['source'] : '';
         }
-        $this->_posts = $this->_getBlogPosts($blogSource);
+        $blogPostCount = isset($blogOptions['count']) ? $blogOptions['count'] : '';
+        $this->_posts = $this->_getBlogPosts($blogSource, $blogPostCount);
         return preg_replace_callback('/<\!--blog_post-->([\s\S]+?)<\!--\/blog_post-->/', array(&$this, '_processBlogPost'), $blogHtml);
     }
 
@@ -85,10 +86,11 @@ class BlogProcessor
      * Get blog post by source
      *
      * @param string $source Source
+     * @param int    $count  Post count
      *
      * @return array
      */
-    private function _getBlogPosts($source) {
+    private function _getBlogPosts($source, $count) {
         $posts = array();
         $categoryId = '';
         $tags = '';
@@ -105,7 +107,7 @@ class BlogProcessor
             }
         }
         // Get recent articles, if $categoryId is empty
-        $blog = new ContentModelCustomArticles(array('category_id' => $categoryId, 'tags' => $tags));
+        $blog = new ContentModelCustomArticles(array('category_id' => $categoryId, 'tags' => $tags, 'count' => $count));
         return $blog->getPosts();
     }
 

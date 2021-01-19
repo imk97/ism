@@ -495,6 +495,24 @@ class NicepageModelActions extends JModelAdmin
         $publishHtml    = isset($opt['publishHtml']) ? $opt['publishHtml'] : '';
         $publishNicePageCss = isset($opt['publishNicePageCss']) ? $opt['publishNicePageCss'] : '';
 
+        $html           = isset($opt['html']) ? $opt['html'] : '';
+        $head           = isset($opt['head']) ? $opt['head'] : '';
+        $bodyClass      = isset($opt['bodyClass']) ? $opt['bodyClass'] : '';
+        $bodyStyle      = isset($opt['bodyStyle']) ? $opt['bodyStyle'] : '';
+        $introImgStruct = isset($opt['introImgStruct']) ? $opt['introImgStruct'] : '';
+
+        $html = str_replace($this->getHomeUrl(), '[[site_path_editor]]', $html);
+        $publishPageParts = str_replace(
+            $this->getHomeUrl() . '/',
+            '[[site_path_live]]',
+            array(
+                'publishHtml'   => $publishHtml,
+                'head'          => $head,
+                'bodyStyle'     => $bodyStyle,
+                'introImgStruct' => $introImgStruct
+            )
+        );
+
         $pageCssUsedIds = '';
         if ($saveAndPublish) {
             list($siteStyleCssParts, $pageCssUsedIds, $headerFooterCssUsedIds) = NicepageHelpersNicepage::processAllColors($publishNicePageCss, $publishHtml, $publishHeaderFooter);
@@ -518,7 +536,7 @@ class NicepageModelActions extends JModelAdmin
                 array(
                     'title' => $pageTitle,
                     'intro' => $pageIntro,
-                    'full' => $publishHtml,
+                    'full' => '<!--np_fulltext-->' . $publishPageParts['publishHtml'] . '<!--/np_fulltext-->',
                     'seoOptions' => array(
                         'title' => $titleInBrowser,
                         'keywords' => $keywords,
@@ -537,7 +555,7 @@ class NicepageModelActions extends JModelAdmin
             if (count($res) > 0) {
                 $article = $res[0];
                 $article->introtext = $pageIntro;
-                $article->fulltext = $publishHtml;
+                $article->fulltext = '<!--np_fulltext-->' . $publishPageParts['publishHtml'] . '<!--/np_fulltext-->';
                 $attribs = $this->_stringToParams($article->attribs ? $article->attribs : '{}');
                 $attribs['article_page_title'] = $titleInBrowser;
                 $article->attribs = $this->_paramsToString($attribs);
@@ -550,12 +568,6 @@ class NicepageModelActions extends JModelAdmin
                 $contentMapper->save($article);
             }
         }
-
-        // Convert base64 to html, because some servers reject requests with tags - body, meta and etc.
-        $html           = isset($opt['html']) ? $opt['html'] : '';
-        $head           = isset($opt['head']) ? $opt['head'] : '';
-        $bodyClass      = isset($opt['bodyClass']) ? $opt['bodyClass'] : '';
-        $bodyStyle      = isset($opt['bodyStyle']) ? $opt['bodyStyle'] : '';
 
         $fonts          = isset($opt['fonts']) ? $opt['fonts'] : '';
         if ($fonts) {
@@ -577,19 +589,6 @@ class NicepageModelActions extends JModelAdmin
         $pageFormsData = $data->get('pageFormsData', '', 'RAW');
         $dialogs = $data->get('dialogs', '', 'RAW');
 
-        $introImgStruct = str_replace($this->getHomeUrl() . '/', '[[site_path_live]]', isset($opt['introImgStruct']) ? $opt['introImgStruct'] : '');
-
-        $html = str_replace($this->getHomeUrl(), '[[site_path_editor]]', $html);
-        $publishPageParts = str_replace(
-            $this->getHomeUrl() . '/',
-            '[[site_path_live]]',
-            array(
-                'publishHtml'   => $publishHtml,
-                'head'          => $head,
-                'bodyStyle'     => $bodyStyle
-            )
-        );
-
         $props = array(
             'html' => $html,
             'publishHtml' => $publishPageParts['publishHtml'],
@@ -607,7 +606,7 @@ class NicepageModelActions extends JModelAdmin
             'metaTags' => $metaTags,
             'customHeadHtml' => $customHeadHtml,
             'titleInBrowser' => $titleInBrowser,
-            'introImgStruct' => $introImgStruct,
+            'introImgStruct' => $publishPageParts['introImgStruct'],
             'hideHeader' => $hideHeader,
             'hideFooter' => $hideFooter,
             'hideBackToTop' => $hideBackToTop,
