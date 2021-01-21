@@ -1,0 +1,203 @@
+[
+    {
+        "name": "lsolesen/pel",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/svenbluege/pel.git",
+            "reference": "c4d0ffab4d58a34288a4e85bccee111941e17add"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/svenbluege/pel/zipball/c4d0ffab4d58a34288a4e85bccee111941e17add",
+            "reference": "c4d0ffab4d58a34288a4e85bccee111941e17add",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "ext-gd": "*",
+            "phpunit/phpunit": ">=4.8.36 <8",
+            "satooshi/php-coveralls": "1.0.*",
+            "squizlabs/php_codesniffer": "^3.0.0"
+        },
+        "time": "2020-11-07T12:01:03+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "lsolesen\\pel\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Pel\\Test\\": "test/"
+            }
+        },
+        "license": [
+            "GPL-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Lars Olesen",
+                "email": "lars@intraface.dk",
+                "homepage": "http://intraface.dk",
+                "role": "Developer"
+            },
+            {
+                "name": "Martin Geisler",
+                "email": "martin@geisler.net",
+                "homepage": "http://geisler.net",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP Exif Library. A library for reading and writing Exif headers in JPEG and TIFF images using PHP.",
+        "homepage": "http://pel.github.com/pel/",
+        "keywords": [
+            "exif",
+            "image"
+        ],
+        "support": {
+            "source": "https://github.com/svenbluege/pel/tree/master"
+        }
+    },
+    {
+        "name": "smarty/smarty",
+        "version": "v3.1.36",
+        "version_normalized": "3.1.36.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/smarty-php/smarty.git",
+            "reference": "fd148f7ade295014fff77f89ee3d5b20d9d55451"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/smarty-php/smarty/zipball/fd148f7ade295014fff77f89ee3d5b20d9d55451",
+            "reference": "fd148f7ade295014fff77f89ee3d5b20d9d55451",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "6.4.1",
+            "smarty/smarty-lexer": "^3.1"
+        },
+        "time": "2020-04-14T14:44:26+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "libs/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Monte Ohrt",
+                "email": "monte@ohrt.com"
+            },
+            {
+                "name": "Uwe Tews",
+                "email": "uwe.tews@googlemail.com"
+            },
+            {
+                "name": "Rodney Rehm",
+                "email": "rodney.rehm@medialize.de"
+            }
+        ],
+        "description": "Smarty - the compiling PHP template engine",
+        "homepage": "http://www.smarty.net",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "svenbluege/jpeg-icc",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/svenbluege/jpeg-icc.git",
+            "reference": "cb26fd2be67e192d50ddc481b1f0b62ee7756ae6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/svenbluege/jpeg-icc/zipball/cb26fd2be67e192d50ddc481b1f0b62ee7756ae6",
+            "reference": "cb26fd2be67e192d50ddc481b1f0b62ee7756ae6",
+            "shasum": ""
+        },
+        "time": "2020-06-21T12:35:26+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "class.jpeg_icc.php"
+            ]
+        },
+        "license": [
+            "BSD License"
+        ],
+        "authors": [
+            {
+                "name": "Sven Bluege",
+                "email": "svenbluege@gmail.com"
+            }
+        ],
+        "description": "PHP JPEG ICC profile manipulator class",
+        "support": {
+            "source": "https://github.com/svenbluege/jpeg-icc/tree/master"
+        }
+    },
+    {
+        "name": "tpyo/amazon-s3-php-class",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/svenbluege/amazon-s3-php-class.git",
+            "reference": "7583a8314f4d92b4acc6197f3af4bd90ce2a7f85"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/svenbluege/amazon-s3-php-class/zipball/7583a8314f4d92b4acc6197f3af4bd90ce2a7f85",
+            "reference": "7583a8314f4d92b4acc6197f3af4bd90ce2a7f85",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "time": "2020-11-04T07:39:59+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "S3.php"
+            ]
+        },
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Donovan Schönknecht",
+                "email": "don@tpyo.net"
+            }
+        ],
+        "description": "A standalone Amazon S3 (REST) client for PHP 5.2.x using CURL that does not require PEAR.",
+        "homepage": "https://github.com/tpyo/amazon-s3-php-class",
+        "support": {
+            "source": "https://github.com/svenbluege/amazon-s3-php-class/tree/master"
+        }
+    }
+]

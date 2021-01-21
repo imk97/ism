@@ -37,6 +37,8 @@
         <position>hmenu</position>
         <position>statistic</position>
         <position>position-sidebar</position>
+      	<position>position-2</position>
+      	<position>submenu</position>
     </positions>
     <languages folder="language">
         <language tag="en-GB">en-GB/en-GB.tpl_home_en_v24.ini</language>

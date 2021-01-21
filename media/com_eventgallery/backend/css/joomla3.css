@@ -1,0 +1,16 @@
+.span12 >.row,
+form >.row{
+	margin-left: 0;
+}
+
+.alert-message {
+	margin-top: 10px;
+}
+
+.eg-filter-bar label {
+	display: none;
+}
+
+.eg-overview .row{
+	margin-left: 0;
+}

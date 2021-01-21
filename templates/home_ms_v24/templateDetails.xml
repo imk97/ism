@@ -35,6 +35,7 @@
     <positions>
         <position>language-switcher</position>
         <position>hmenu</position>
+      	<position>position-2</position>
         <position>statistic</position>
         <position>position-sidebar</position>
     </positions>

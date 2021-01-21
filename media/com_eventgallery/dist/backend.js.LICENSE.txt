@@ -1,0 +1,13 @@
+/*!
+ * Serialize all form data into a query string
+ * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * Modified to use any HTML element instead of a form element.
+ * @param  {Node}   form The form container to serialize
+ * @return {String}      The serialized form data
+ */
+
+/*!
+ * Vue.js v2.6.12
+ * (c) 2014-2020 Evan You
+ * Released under the MIT License.
+ */

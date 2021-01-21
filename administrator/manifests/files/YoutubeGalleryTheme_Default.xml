@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="file" version="3.0" method="upgrade">
+    <name>YoutubeGalleryTheme_Default</name>
+    <version>5.0.8</version>
+    <creationDate>July 2020</creationDate>
+    <author>Super User</author>
+    <authorEmail>ivankomlev@gmail.com</authorEmail>
+    <authorUrl>https://api.joomlaboat.com/</authorUrl>
+    <license>http://www.gnu.org/licenseses/gpl-2.0.html GNU/GPL</license>
+    <description><![CDATA[
+
+		      <h3>YoutubaGallery Theme - Default</h3>
+<div><a href="http://www.joomlaboat.com/youtube-gallery/youtube-gallery-themes" target="_blank">
+More Themes</a></div>
+			 <div><br/>If you use YoutubeGallery, please post a
+			 review at the <a href="http://extensions.joomla.org/extensions/social-web/social-media/video-channels/13075" target="_blank">Joomla! Extensions Directory.</a> Thank you.<div>
+			 <br/><br/>
+]]></description>
+
+	<installfile>install.php</installfile>
+	<scriptfile>install.php</scriptfile>
+
+	<files>
+		<filename>Default.xml</filename>
+		<filename>theme.txt</filename>
+		<filename>install.php</filename>
+</files>
+</extension>

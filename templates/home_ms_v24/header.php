@@ -71,8 +71,8 @@
                 </div>
                 <div class="u-container-style u-group u-shape-rectangle u-group-7">
                   <div class="u-container-layout u-container-layout-9">
-                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-12" data-image-width="74" data-image-height="63" data-href="#">
-                    <a href="#" class="u-btn u-button-style u-expanded-width u-none u-btn-4">Aduan &amp;&nbsp;Maklumbalas</a>
+                    <img src="<?php $app = JFactory::getApplication();  echo JURI::root(true); ?>/templates/<?php echo $app->getTemplate(); ?>/images/maklumbalas.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-12" data-image-width="74" data-image-height="63" onclick="window.open('https://kpwkm.spab.gov.my/eApps/system/index.do')">
+                    <a target="_blank" href="https://kpwkm.spab.gov.my/eApps/system/index.do" class="u-btn u-button-style u-expanded-width u-none u-btn-4">Aduan &amp;&nbsp;Maklumbalas</a>
                   </div>
                 </div>
               </div>

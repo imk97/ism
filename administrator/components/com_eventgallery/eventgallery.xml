@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0.0" method="upgrade">
+	<name>COM_EVENTGALLERY</name>
+	<author>Sven Blüge</author>
+	<creationDate>2020-12-03</creationDate>
+	<copyright></copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>svenbluege@gmail.com</authorEmail>
+	<authorUrl>www.svenbluege.de</authorUrl>
+	<version>3.11.22</version>
+	<description>COM_EVENTGALLERY_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install/install.mysql.sql</file>
+		</sql>
+	</install>
+    <uninstall>
+	  <sql>
+	    <file charset="utf8" driver="mysql">sql/install/uninstall.mysql.sql</file>
+	  </sql>
+	</uninstall>
+	<!--<update>
+    	<schemas>
+	    	<schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+	</update>-->
+
+	<files folder="site">
+		<folder>controllers</folder>
+		<folder>language</folder>
+		<folder>helpers</folder>
+		<folder>library</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+		<folder>vendor</folder>
+
+		<filename>controller.php</filename>
+		<filename>eventgallery.php</filename>
+		<filename>router.php</filename>
+		<filename>index.html</filename>
+		<filename>config.php</filename>
+		<filename>eventgallery_autoload.php</filename>
+	</files>
+
+	<media folder="media" destination="com_eventgallery">
+        <filename>index.html</filename>
+        <folder>backend</folder>
+        <folder>common</folder>
+		<folder>dist</folder>
+        <folder>frontend</folder>
+    </media>
+
+	<administration>
+		<menu img="class:media" link="option=com_eventgallery&amp;view=eventgallery">COM_EVENTGALLERY_MENU</menu>
+		<submenu>
+			<menu img="class:media" link="option=com_eventgallery&amp;view=eventgallery">COM_EVENTGALLERY_MENU_OVERVIEW</menu>
+			<menu img="class:media" link="option=com_eventgallery&amp;view=eventgallery">COM_EVENTGALLERY_MENU_SEPARATOR_1</menu>
+			<menu img="class:media" link="option=com_eventgallery&amp;view=events">COM_EVENTGALLERY_MENU_EVENTS</menu>
+			<menu img="class:article" link="option=com_eventgallery&amp;view=orders">COM_EVENTGALLERY_MENU_ORDERS</menu>
+			<menu link="option=com_eventgallery&amp;view=messages">COM_EVENTGALLERY_SUBMENU_MESSAGES</menu>
+			<menu img="class:media" link="option=com_eventgallery&amp;view=eventgallery">COM_EVENTGALLERY_MENU_SEPARATOR_2</menu>
+			<menu link="option=com_categories&amp;extension=com_eventgallery">COM_EVENTGALLERY_SUBMENU_CATEGORIES</menu>
+			<menu link="option=com_eventgallery&amp;view=googlephotosaccounts">COM_EVENTGALLERY_SUBMENU_GOOGLEPHOTOSACCOUNTS</menu>
+			<menu link="option=com_eventgallery&amp;view=watermarks">COM_EVENTGALLERY_SUBMENU_WATERMARKS</menu>
+			<menu link="option=com_eventgallery&amp;view=imagetypes">COM_EVENTGALLERY_SUBMENU_IMAGETYPES</menu>
+			<menu link="option=com_eventgallery&amp;view=imagetypegroups">COM_EVENTGALLERY_SUBMENU_IMAGETYPEGROUPS</menu>
+			<menu link="option=com_eventgallery&amp;view=imagetypesets">COM_EVENTGALLERY_SUBMENU_IMAGETYPESETS</menu>
+			<menu link="option=com_eventgallery&amp;view=orderstatuses">COM_EVENTGALLERY_SUBMENU_ORDERSTATUSES</menu>
+			<menu link="option=com_eventgallery&amp;view=surcharges">COM_EVENTGALLERY_SUBMENU_SURCHARGES</menu>
+			<menu link="option=com_eventgallery&amp;view=shippingmethods">COM_EVENTGALLERY_SUBMENU_SHIPPINGMETHODS</menu>
+			<menu link="option=com_eventgallery&amp;view=paymentmethods">COM_EVENTGALLERY_SUBMENU_PAYMENTMETHODS</menu>
+			<menu link="option=com_eventgallery&amp;view=emailtemplates">COM_EVENTGALLERY_SUBMENU_EMAILTEMPLATES</menu>
+			<menu img="class:media" link="option=com_eventgallery&amp;view=eventgallery">COM_EVENTGALLERY_MENU_SEPARATOR_3</menu>
+			<menu link="option=com_eventgallery&amp;view=documentation">COM_EVENTGALLERY_SUBMENU_DOCUMENTATION</menu>
+			<menu link="option=com_eventgallery&amp;view=systemcheck">COM_EVENTGALLERY_SUBMENU_SYSTEMCHECK</menu>
+			<menu link="option=com_eventgallery&amp;view=gdpr">COM_EVENTGALLERY_SUBMENU_GDPR</menu>
+		</submenu>
+		<files folder="admin">
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>language</folder>
+			<folder>layouts</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<folder>sql</folder>
+			<filename>access.xml</filename>
+			<filename>eventgallery.php</filename>
+			<filename>version.php</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+		</files>
+
+	</administration>
+
+</extension>

@@ -1,0 +1,17 @@
+.sidebar-nav .chosen-container {
+	max-width: 100%;
+}
+
+.eg-filter-bar,
+.eg-search-bar {
+	margin-bottom: 5px;
+	padding: 10px 10px 0px 10px;
+}
+
+.eg-filter-bar input,
+.eg-filter-bar select,
+.eg-search-bar input,
+.eg-search-bar select{
+	margin-bottom: 10px;
+	background-color: white;
+}

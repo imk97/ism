@@ -105,14 +105,97 @@ $indexDir = dirname(__FILE__);
       
     nav > div > ul > li.u-nav-item.parent > a::after {
       content: "\25bc"; 
-      float:right;
-      font-size: 10px;
+      font-size: 8px;
+      display: flex;
+      align-content: center;
+      float: right;
+      
     }
+
+	nav > div > ul > li.u-nav-item.parent > div.u-nav-popup > ul > li.u-nav-item.parent > a::after {
+      content: " \25B6";
+      font-size: 8px;
+    }
+	
+	.row::after {
+      content: "";
+      clear: both;
+      display: table;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    [class*="col-content-"] {
+      float: left;
+      padding: 5px 15px;
+    }
+
+    /* For mobile phones: */
+    [class*="col-content-"] {
+      width: 100%;
+    }
+
+    @media only screen and (min-width: 600px) {
+      /* For tablets: */
+      .col-s-1 {width: 8.33%;}
+      .col-s-2 {width: 16.66%;}
+      .col-s-3 {width: 25%;}
+      .col-s-4 {width: 33.33%;}
+      .col-s-5 {width: 41.66%;}
+      .col-s-6 {width: 50%;}
+      .col-s-7 {width: 58.33%;}
+      .col-s-8 {width: 66.66%;}
+      .col-s-9 {width: 75%;}
+      .col-s-10 {width: 83.33%;}
+      .col-s-11 {width: 91.66%;}
+      .col-s-12 {width: 100%; }
+    }
+    @media only screen and (min-width: 768px) {
+      /* For desktop: */
+      .col-content-1 {width: 8.33%; padding-left: 5px; }
+      .col-content-2 {width: 16.66%; padding-left: 5px; }
+      .col-content-3 {width: 25%; padding-left: 5px; }
+      .col-content-4 {width: 33.33%; padding-left: 5px; }
+      .col-content-5 {width: 41.66%; padding-left: 5px; }
+      .col-content-6 {width: 50%; padding-left: 5px; }
+      .col-content-7 {width: 58.33%; padding-left: 5px; }
+      .col-content-8 {width: 66.66%; padding-left: 5px; }
+      .col-content-9 {width: 75%; padding-left: 5px; }
+      .col-content-10 {width: 83.33%; padding-left: 5px; }
+      .col-content-11 {width: 91.66%; padding-left: 5px; }
+      .col-content-12 {width: 100%; padding-left: 5px; }
+    }
+
+	.container-content {
+      margin: auto;
+      max-width: 58%;
+      font-size: 14px;
+    }
+
     </style>
 </head>
 <body <?php echo $bodyClass . $bodyStyle; ?>>
 <?php $this->view->renderHeader($indexDir, $this->params); ?>
-<?php $this->view->renderLayout(); ?>
+<div class="container-content">
+    <div class="row">
+    	<div class="col-content-12 col-s-12">
+ 			<br>
+    		<jdoc:include type="modules" name="position-2" />
+    	</div>
+    </div>
+    <?php $positionName = 'submenu'; if ($positionName && CoreStatements::containsModules($positionName)) : ?>
+    <div class="row">
+      <div class="col-content-2 col-s-12">
+          <jdoc:include type="modules" name="submenu" />
+      </div>
+      <div class="col-content-8 col-s-12">
+          <?php $this->view->renderLayout(); ?>
+      </div>
+    <?php else: ?>
+      	<?php $this->view->renderLayout(); ?>
+    <?php endif; ?>
+	</div>
+</div>
 <?php $this->view->renderFooter($indexDir, $this->params); ?>
 
 

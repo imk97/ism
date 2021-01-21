@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <extension type="package" version="2.5" method="upgrade">
+ <name>Youtube Gallery Package</name>
+ <author>JoomlaBoat.com</author>
+ <creationDate>November, 2020</creationDate>
+ <packagename>youtubegallery</packagename>
+ <version>5.2.6</version>
+ <url>http://www.joomlaboat.com/</url>
+ <license>GNU General Public License</license>
+ <packager>JoomlaBoat.com</packager>
+ <packagerurl>http://www.joomlaboat.com/youtube-gallery</packagerurl>
+ <description>Youtube Gallery v5.2.6 for Joomla 3.x</description>
+ <update>http://www.joomlaboat.com/youtube-gallery</update>
+ <files folder="packages">
+   <file type="component" id="com_youtubegallery">com_youtubegallery.zip</file>
+   <file type="module" id="mod_youtubegallery" client="site">mod_youtubegallery.zip</file>
+   <file type="plugin" id="youtubegallery" group="content">plg_youtubegallery.zip</file>
+   <file type="plugin" id="plg_editors-xtd_youtubegallerybutton" group="editors-xtd">xtd_youtubegallery.zip</file>
+   <file type="file" id="YoutubeGalleryTheme_Default">Default.zip</file>
+   <file type="file" id="YoutubeGalleryTheme_SimpleGridJCEPopup">SimpleGridJCEPopup.zip</file>
+
+ </files>                                                
+
+	<updateservers>
+	    <server type="extension" enabled="1" element="com_youtubegallery" priority="2" name="Youtube Gallery">https://joomlaboat.com/free-update/youtube-gallery</server>
+	</updateservers>
+ </extension>
