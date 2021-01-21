@@ -322,6 +322,10 @@ EOF;
         }
 
         list($bodyStartTag, $bodyContent, $bodyEndTag) = array($bodyMatches[1], $bodyMatches[2], $bodyMatches[3]);
+
+        $bodyStartTagUpdated = str_replace('{bodyClass}', $this->getBodyClass(), $bodyStartTag);
+        $bodyStartTagUpdated = str_replace('{bodyStyle}', $this->getBodyStyle(), $bodyStartTagUpdated);
+
         return str_replace(
             array(
                 $bodyStartTag,
@@ -329,7 +333,7 @@ EOF;
                 $bodyEndTag,
             ),
             array(
-                str_replace('{bodyClass}', $this->getBodyClass(), $bodyStartTag) . $this->getHeader(),
+                $bodyStartTagUpdated . $this->getHeader(),
                 $sectionsHtml,
                 $this->getFooter() . $bodyEndTag,
             ),

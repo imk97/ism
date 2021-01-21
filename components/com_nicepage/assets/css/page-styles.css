@@ -4876,7 +4876,7 @@ a {
 } .nicepage-container 
 .u-form-horizontal .u-input {
   display: flex;
-  width: auto;
+  width: 0;
   vertical-align: middle;
   flex-grow: 1;
   flex-shrink: 1;

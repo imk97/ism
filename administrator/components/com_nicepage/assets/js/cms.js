@@ -209,6 +209,9 @@ if (window.cmsVars.npButtonText) {
         if (window.cmsVars.buttonAreaClass !== '') {
             Joomla.originalsubmitbutton = Joomla.submitbutton;
             Joomla.submitbutton = function npsubmitbutton(action) {
+                if (window.cmsVars.jEditor !== 'none' && window.cmsVars.jEditor !== 'codemirror') {
+                    $('.adminform').html('');//remove custom editor content
+                }
                 if (action && action == 'article.save2copy') {
                     $.post(window.cmsVars.duplicatePageUrl, {postId: window.cmsVars.pageId}).done(function (data) {
                         if (data && data.indexOf('ok') !== -1) {

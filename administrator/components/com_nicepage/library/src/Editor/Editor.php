@@ -641,6 +641,7 @@ EOF;
         $this->_scriptsPhpVars = array_merge(
             $this->_scriptsPhpVars,
             array(
+                'jEditor' => JFactory::getConfig()->get('editor'),
                 'forceRefresh' => $themeTypographyCacheForceRefresh,
                 'infoDataUrl'  => dirname($this->getAdminUrl()) . '/index.php?option=com_nicepage&task=getInfoData',
                 'pageId'  => $this->_article->id ? $this->_article->id : -1,
