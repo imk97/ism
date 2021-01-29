@@ -14,19 +14,6 @@
         <folder>sql</folder>
     </files>
     <config>
-        <fields name="params">
-            <fieldset name="basic">
-                <field 
-                    name = "latest_update" 
-                    type = "calendar" 
-                    showtime = "false" 
-                    todaybutton = "true" 
-                    translateformat = "true"
-                    label = "Tarikh Kemaskini"
-                    format = "%d %b %Y"
-                    required = "true" />
-            </fieldset>
-        </fields>
     </config>
     <install>
         <sql>
