@@ -25,7 +25,7 @@ if ($metaGeneratorContent) {
 }
 
 $templateUrl = $document->baseurl . '/templates/' . $document->template;
-$faviconPath = "" ? $templateUrl . '/images/' . "" : '';
+$faviconPath = "" ? $templateUrl . '/images/' . "" : 'logo-ism-removebg-preview.png';
 
 Core::load("Core_Page");
 // Initialize $view:
@@ -237,14 +237,14 @@ $(document).ready( function() {
       console.log("blue")
       //$(".u-header, u-custom-font").css('color', '#39B0EB')
       $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #39B0EB)')
-      $('.color_custom, .header-change, .footer-change').css('background-color', '#d1d8d8')
+      $('.color_custom, .header-change, .footer-change').css('background-color', '#D1D8DB')
     })
 
     // Grey
     $('#grey').click( function () {
       console.log("grey")
 		//$(".u-header, header").css('color', '#d1d8d8')
-      $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #d1d8d8)')
+      $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #D1D8DB)')
       $('.color_custom, .header-change, .footer-change, .content').css('background-color', '#AF601A')
     })
 
@@ -253,14 +253,14 @@ $(document).ready( function() {
       console.log("mint green")
       //$('.u-header, header').css('color', '#98ff98')
       $('.u-header, .u-footer, .content').css('background-image', 'linear-gradient(to right, white, #98ff98)')
-      $('.color_custom, .header-change, .footer-change, .content').css('background-color', '#d1d8d8')
+      $('.color_custom, .header-change, .footer-change, .content').css('background-color', '#D1D8DB')
     })
       
     // Black
     $('#black').click( function() {
       //$('.u-header, header').css('color', '#000000')
-      $('.u-header, .u-footer').css('background-image', 'linear-gradient(to right, white, #ebac05)')
-      $('.color_custom, .header-change, .footer-change').css('background-color', '#ebac05')
+      $('.u-header, .u-footer').css('background-image', 'linear-gradient(to right, white, #EBAC05)')
+      $('.color_custom, .header-change, .footer-change').css('background-color', '#EBAC05')
       $('.content').css({'background-color':'#ebac05', 'background-image': ''})
     })
 

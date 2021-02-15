@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>Tarikh Kemaskini!</name>
+    <author>Itmam</author>
+    <version>1.0.0</version>
+    <description>A simple tarikh kemaskini! module.</description>
+    <files>
+        <filename>mod_dateupdated.xml</filename>
+        <filename module="mod_dateupdated">mod_dateupdated.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+        <folder>sql</folder>
+    </files>
+    <config>
+        <fields name = "params">
+           <fieldset name = "basic">
+               <field 
+		name = "tarikh" 
+		type = "calendar" 
+        format = "%d %b %Y"
+		showtime = "false" 
+		todaybutton = "true" 
+		translateformat = "false" 
+		label = "Tarikh Kemaskini"  
+		required = "false"
+        disabled = "true" />
+           </fieldset>
+        </fields>
+    </config>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/mysql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <!--</uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/mysql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/mysql/updates</schemapath>
+        </schemas>
+    </update>-->
+</extension>

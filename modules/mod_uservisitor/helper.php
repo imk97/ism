@@ -50,6 +50,13 @@ class modVisitorHelper
                     ->from($db->quoteName('#__Visitor'));
         $db->setQuery($test1);
         $test = $db->loadColumn();
+
+	    $query = $db->getQuery(true)
+                    ->select('date')
+                    ->from($db->quoteName('#__dateupdate'))
+                    ->order('id DESC');
+        $db->setQuery($query);
+        $date = $db->loadResult();
         // print_r($test);
         $month = 0;
         for ($i=0; $i < count($test); $i++) { 
@@ -61,7 +68,7 @@ class modVisitorHelper
 
         $result = array();
 
-        array_push($result, $total, $daily, $month);
+        array_push($result, $total, $daily, $month, $date);
 
         return $result;
     }
