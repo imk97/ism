@@ -158,6 +158,10 @@ $indexDir = dirname(__FILE__);
       margin: auto;
       max-width: 58%;
       font-size: 14px;
+      //padding-right: 15px;
+      //padding-left: 15px;
+      //margin-right: auto;
+      //margin-left: auto;
     }
 
     </style>
